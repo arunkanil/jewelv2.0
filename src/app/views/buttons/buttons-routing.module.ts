@@ -1,0 +1,46 @@
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+
+import { ButtonsComponent } from './buttons.component';
+import { DropdownsComponent } from './dropdowns.component';
+import { BrandButtonsComponent } from './brand-buttons.component';
+
+const routes: Routes = [
+  {
+    path: '',
+    
+    children: [
+      {
+        path: '',
+        redirectTo: 'buttons'
+      },
+      {
+        path: 'view_profile',
+        component: ButtonsComponent,
+        data: {
+          title: 'Profile'
+        }
+      },
+      {
+        path: 'dropdowns',
+        component: DropdownsComponent,
+        data: {
+          title: 'Dropdowns'
+        }
+      },
+      {
+        path: 'brand-buttons',
+        component: BrandButtonsComponent,
+        data: {
+          title: 'Brand buttons'
+        }
+      }
+    ]
+  }
+];
+
+@NgModule({
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule]
+})
+export class ButtonsRoutingModule {}

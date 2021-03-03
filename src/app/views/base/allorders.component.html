@@ -1,0 +1,25 @@
+<div class="animated fadeIn">
+  <div class="card">
+    <div class="card-header">
+      <h2> All Orders</h2>
+    </div>
+    <div class="card-body">
+      <div class="row mb-3">
+        <div *ngFor="let item of orders" class="col-sm-4">
+          <div class="card" style="min-width: fit-content;">
+            <div class="card-body">
+              <div class="row">
+                <div class="col">
+                  <h4>{{item.order_id}}</h4><br> Pick up date : Jan 22 2020 <br> Pick up time : 4:30 pm
+                </div>
+                <div class="col">
+                  <div class="price-displayer" style="background-color: #4AD991;"><span class="price">{{item.total_amount}}</span> <br /> <span>ORDER VALUE</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

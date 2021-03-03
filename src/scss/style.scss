@@ -1,0 +1,23 @@
+// If you want to override variables do it here
+@import "variables";
+
+// Import styles
+@import "~@coreui/coreui/scss/coreui";
+
+// If you want to add something do it here
+@import "custom";
+
+.price-displayer {
+    text-align: center;
+    align-items: center;
+    background-color: #665eff;
+    color: white;
+    border-radius: 8px;
+    height: 100px;
+    justify-content: center;
+    width: 100%;
+}
+.price{
+    font-size: 40px;
+    font-weight: 600;
+}
