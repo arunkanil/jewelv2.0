@@ -8,7 +8,7 @@ import {
 import { setContext } from "@apollo/client/link/context";
 import { HttpLink } from "apollo-angular/http";
 
-const uri = "http://jewel-core.telemarketing.untanglepro.com/graphql"; // <-- add the URL of the GraphQL server here
+const uri = "https://jewel-core.telemarketing.untanglepro.com/graphql"; // <-- add the URL of the GraphQL server here
 export function createApollo(httpLink: HttpLink): ApolloClientOptions<any> {
 
   const basic = setContext((operation, context) => ({
