@@ -107,7 +107,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-const uri = "http://jewel-core.telemarketing.untanglepro.com/graphql"; // <-- add the URL of the GraphQL server here
+const uri = "https://jewel-core.telemarketing.untanglepro.com/graphql"; // <-- add the URL of the GraphQL server here
 function createApollo(httpLink) {
     const basic = Object(_apollo_client_link_context__WEBPACK_IMPORTED_MODULE_4__["setContext"])((operation, context) => ({
         headers: {

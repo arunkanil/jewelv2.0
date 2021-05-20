@@ -212,7 +212,7 @@
       /*! apollo-angular/http */
       "F/12");
 
-      var uri = "http://jewel-core.telemarketing.untanglepro.com/graphql"; // <-- add the URL of the GraphQL server here
+      var uri = "https://jewel-core.telemarketing.untanglepro.com/graphql"; // <-- add the URL of the GraphQL server here
 
       function createApollo(httpLink) {
         var basic = Object(_apollo_client_link_context__WEBPACK_IMPORTED_MODULE_4__["setContext"])(function (operation, context) {
