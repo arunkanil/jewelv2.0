@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { ReadyForDeliveryComponent } from './readyfordelivery.component';
+import { CustomersComponent } from './readyfordelivery.component';
 import { AllOrdersComponent } from './allorders.component';
-import { NewOrdersComponent } from './neworders.component';
+import { AgentsComponent } from './neworders.component';
+import { AgentDetailComponent } from './agentdetail.component';
+import { CustomerDetailComponent } from './customerdetail.component';
 
 const routes: Routes = [
   {
@@ -15,16 +17,16 @@ const routes: Routes = [
       },
       {
         path: 'ready_for_delivery',
-        component: ReadyForDeliveryComponent,
+        component: CustomersComponent,
         data: {
           title: 'Ready for Delivery'
         }
       },
       {
         path: 'order_processing',
-        component: NewOrdersComponent,
+        component: AgentsComponent,
         data: {
-          title: 'Order Processing'
+          title: 'Agents'
         }
       },
       {
@@ -32,6 +34,20 @@ const routes: Routes = [
         component: AllOrdersComponent,
         data: {
           title: 'All Orders'
+        }
+      },
+      {
+        path: 'agent_details/:id',
+        component: AgentDetailComponent,
+        data: {
+          title: 'Agent Details'
+        }
+      },
+      {
+        path: 'customer_details/:id',
+        component: CustomerDetailComponent,
+        data: {
+          title: 'Customer Details'
         }
       },
     ]

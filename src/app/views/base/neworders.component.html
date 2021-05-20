@@ -1,176 +1,161 @@
 <div class="animated fadeIn">
   <div class="card">
-    <div class="card-header">
-      <h2>New Orders</h2>
+    <div
+      class="card-header"
+      style="display: flex; justify-content: space-between"
+    >
+      <h2>Agents</h2>
+      <button
+        type="button"
+        class="btn btn-primary"
+        data-toggle="modal"
+        (click)="myModal.show()"
+      >
+        New
+      </button>
     </div>
     <div class="card-body">
       <div class="row">
-        <carousel [margin]="20" [height]="200" [cellWidth]="400" [dots]="true">
-          <div class="carousel-cell">
-            <div class="card">
-              <div class="card-body">
-                <div class="row">
-                  <div class="col">
-                    <h4>John Daniel </h4><br> Pick up date : Jan 22 2020 <br> Pick up time : 4:30 pm
-                  </div>
-                  <div class="col">
-                    <div class="price-displayer"><span class="price">5500</span> <br /> <span>ORDER VALUE</span></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="carousel-cell">
-            <div class="card">
-              <div class="card-body">
-                <div class="row">
-                  <div class="col">
-                    <h4>John Daniel </h4><br> Pick up date : Jan 22 2020 <br> Pick up time : 4:30 pm
-                  </div>
-                  <div class="col">
-                    <div class="price-displayer"><span class="price">5500</span> <br /> <span>ORDER VALUE</span></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="carousel-cell">
-            <div class="card">
-              <div class="card-body">
-                <div class="row">
-                  <div class="col">
-                    <h4>John Daniel </h4><br> Pick up date : Jan 22 2020 <br> Pick up time : 4:30 pm
-                  </div>
-                  <div class="col">
-                    <div class="price-displayer"><span class="price">5500</span> <br /> <span>ORDER VALUE</span></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="carousel-cell">
-            <div class="card">
-              <div class="card-body">
-                <div class="row">
-                  <div class="col">
-                    <h4>John Daniel </h4><br> Pick up date : Jan 22 2020 <br> Pick up time : 4:30 pm
-                  </div>
-                  <div class="col">
-                    <div class="price-displayer"><span class="price">5500</span> <br /> <span>ORDER VALUE</span></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="carousel-cell">
-            <div class="card">
-              <div class="card-body">
-                <div class="row">
-                  <div class="col">
-                    <h4>John Daniel </h4><br> Pick up date : Jan 22 2020 <br> Pick up time : 4:30 pm
-                  </div>
-                  <div class="col">
-                    <div class="price-displayer"><span class="price">5500</span> <br /> <span>ORDER VALUE</span></div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </carousel>
-      </div>
-    </div>
-  </div>
-  <div class="card">
-    <div class="card-header">
-      <h2> In Process</h2>
-    </div>
-    <div class="card-body">
-      <div class="row mb-3">
-        <div class="col-sm-4">
-          <div class="card" style="min-width: fit-content;">
-            <div class="card-body">
-              <div class="row">
-                <div class="col">
-                  <h4>John Daniel </h4><br> Pick up date : Jan 22 2020 <br> Pick up time : 4:30 pm
-                </div>
-                <div class="col">
-                  <div class="price-displayer" style="background-color: #4AD991;"><span class="price">5500</span> <br /> <span>ORDER VALUE</span></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-4">
-          <div class="card" style="min-width: fit-content;">
-            <div class="card-body">
-              <div class="row">
-                <div class="col">
-                  <h4>John Daniel </h4><br> Pick up date : Jan 22 2020 <br> Pick up time : 4:30 pm
-                </div>
-                <div class="col">
-                  <div class="price-displayer" style="background-color: #4AD991;"><span class="price">5500</span> <br /> <span>ORDER VALUE</span></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-4">
-          <div class="card" style="min-width: fit-content;">
-            <div class="card-body">
-              <div class="row">
-                <div class="col">
-                  <h4>John Daniel </h4><br> Pick up date : Jan 22 2020 <br> Pick up time : 4:30 pm
-                </div>
-                <div class="col">
-                  <div class="price-displayer" style="background-color: #4AD991;"><span class="price">5500</span> <br /> <span>ORDER VALUE</span></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-4">
-          <div class="card" style="min-width: fit-content;">
-            <div class="card-body">
-              <div class="row">
-                <div class="col">
-                  <h4>John Daniel </h4><br> Pick up date : Jan 22 2020 <br> Pick up time : 4:30 pm
-                </div>
-                <div class="col">
-                  <div class="price-displayer" style="background-color: #4AD991;"><span class="price">5500</span> <br /> <span>ORDER VALUE</span></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-4">
-          <div class="card" style="min-width: fit-content;">
-            <div class="card-body">
-              <div class="row">
-                <div class="col">
-                  <h4>John Daniel </h4><br> Pick up date : Jan 22 2020 <br> Pick up time : 4:30 pm
-                </div>
-                <div class="col">
-                  <div class="price-displayer" style="background-color: #4AD991;"><span class="price">5500</span> <br /> <span>ORDER VALUE</span></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-sm-4">
-          <div class="card" style="min-width: fit-content;">
-            <div class="card-body">
-              <div class="row">
-                <div class="col">
-                  <h4>John Daniel </h4><br> Pick up date : Jan 22 2020 <br> Pick up time : 4:30 pm
-                </div>
-                <div class="col">
-                  <div class="price-displayer" style="background-color: #4AD991;"><span class="price">5500</span> <br /> <span>ORDER VALUE</span></div>
-                </div>
-              </div>
-            </div>
-          </div>
+        <div class="col-12">
+          <ag-grid-angular
+            #agGrid
+            style="width: 100%; height: 500px"
+            id="myGrid"
+            class="ag-theme-alpine"
+            [columnDefs]="columnDefs"
+            [rowData]="rowData"
+            [frameworkComponents]="frameworkComponents"
+            [rowSelection]="rowSelection"
+            (gridReady)="onGridReady($event)"
+            (selectionChanged)="onSelectionChanged($event)"
+            animateRows="true"
+          >
+          </ag-grid-angular>
         </div>
       </div>
     </div>
   </div>
+  <div
+    bsModal
+    #myModal="bs-modal"
+    class="modal fade"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="myModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Add New Agent</h4>
+          <button
+            type="button"
+            class="close"
+            (click)="myModal.hide()"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="agentForm" (ngSubmit)="FormSubmit()">
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input
+                type="text"
+                class="form-control"
+                id="name"
+                name="name"
+                formControlName="name"
+                placeholder="Enter agent name"
+              />
+            </div>
+            <div class="form-group">
+              <label for="email">E-mail</label>
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                name="email"
+                formControlName="email"
+                placeholder="Enter agent email"
+              />
+            </div>
+            <div class="form-group">
+              <label for="street">Phone 1</label>
+              <input
+                type="number"
+                class="form-control"
+                id="phone1"
+                name="phone1"
+                formControlName="phone1"
+                placeholder="Enter Phone 1"
+              />
+            </div>
+            <div class="form-group">
+              <label for="phone2">Phone 2</label>
+              <input
+                type="number"
+                class="form-control"
+                id="phone2"
+                name="phone2"
+                formControlName="phone2"
+                placeholder="Enter Phone 2"
+              />
+            </div>
+            <div class="form-group">
+              <label for="phone3">Phone 3</label>
+              <input
+                type="number"
+                class="form-control"
+                id="phone3"
+                name="phone3"
+                formControlName="phone3"
+                placeholder="Enter Phone 3"
+              />
+            </div>
+            <div class="form-group">
+              <label for="group">Group</label>
+              <select
+                class="form-control"
+                id="group"
+                required
+                ngModel
+                name="group"
+                formControlName="group"
+              >
+                <option value="" disabled selected hidden>Choose...</option>
+                <option *ngFor="let item of groups" value="{{ item.id }}">
+                  {{ item.Name }}
+                </option>
+              </select>
+            </div>
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Close
+            </button>
+            <button
+              type="submit"
+              class="btn btn-primary ml-2"
+              [disabled]="btnLoading || !agentForm.valid"
+            >
+              <span
+                *ngIf="btnLoading"
+                class="spinner-border spinner-border-sm"
+                role="status"
+                aria-hidden="true"
+              ></span>
+              Save changes
+            </button>
+          </form>
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+  <!-- /.modal -->
 </div>

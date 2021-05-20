@@ -1,0 +1,198 @@
+<div class="animated fadeIn">
+    <div bsModal #deleteModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm">
+            <div class="modal-content">
+                <div class="modal-body text-center">
+                    Do you want to delete this agent?
+                </div>
+                <div class="modal-footer justify-content-around">
+                    <button type="button" class="btn btn-secondary" (click)="deleteModal.hide()">
+                        No! Cancel.
+                    </button>
+                    <button type="button" class="btn btn-primary" (click)="deleteAgent()">
+                        Yes! Delete.
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="card">
+    <div class="card-header" style="display: flex; justify-content: space-between">
+        <h2>Customer Details</h2>
+        <span>
+            <!-- <button type="button" class="btn btn-primary" data-toggle="modal" (click)="myModal.show()">
+                Edit
+            </button> -->
+            <!-- <button type="button" class="btn btn-danger" data-toggle="modal" (click)="deleteModal.show()">
+                Delete
+            </button> -->
+        </span>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col">
+                <table class="table table-striped">
+                    <tbody>
+                        <tr>
+                            <td>ID</td>
+                            <td>{{details?.id}}</td>
+                        </tr>
+                        <tr>
+                            <td>Name Of Father</td>
+                            <td>{{details?.NameOfBride}}</td>
+                        </tr>
+                        <tr>
+                            <td>Name Of Father</td>
+                            <td>{{details?.NameOfFather}}</td>
+                        </tr>
+                        <tr>
+                            <td>Name Of Mother</td>
+                            <td>{{ details?.NameOfMother }}</td>
+                        </tr>
+                        <tr>
+                            <td>Marriage Date</td>
+                            <td>{{ details?.MarriageDate }}</td>
+                        </tr>
+                        <tr>
+                            <td>Marriage Month</td>
+                            <td>{{ details?.MarriageMonth }}</td>
+                        </tr>
+                        <tr>
+                            <td>Agent</td>
+                            <td>
+                                <span class="badge badge-warning">{{ details.tele_caller_contact?.Name }}</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>House Name</td>
+                            <td>{{ details.Address?.HouseName }}</td>
+                        </tr>
+                        <tr>
+                            <td>Landmark</td>
+                            <td>{{ details.Address?.Landmark }}</td>
+                        </tr>
+                        <tr>
+                            <td>Locality</td>
+                            <td>{{ details.Address?.locality?.Name }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col">
+                <div class="card" *ngFor="let item of details.TelecallerRemarks">
+                    <div class="card-body">
+                        <h5 class="card-title">{{item.CallHistory.event_date_time}}</h5>
+                        <p class="card-text">{{item.RemarksText}}</p>
+                        <span class="badge badge-primary">{{item.CallHistory.users_permissions_user.username}}</span>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-primary" data-toggle="modal" (click)="commentModal.show()">
+                    Add Comment
+                </button>
+            </div>
+        </div>
+
+    </div>
+    <div bsModal #myModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Edit Agent</h4>
+                    <button type="button" class="close" (click)="myModal.hide()" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form [formGroup]="agentForm" (ngSubmit)="FormSubmit()">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" class="form-control" id="name" name="name" formControlName="name"
+                                placeholder="Enter agent name" />
+                        </div>
+                        <div class="form-group">
+                            <label for="email">E-mail</label>
+                            <input type="email" class="form-control" id="email" name="email" formControlName="email"
+                                placeholder="Enter agent email" />
+                        </div>
+                        <div class="form-group">
+                            <label for="street">Phone 1</label>
+                            <input type="number" class="form-control" id="phone1" name="phone1" formControlName="phone1"
+                                placeholder="Enter Phone 1" />
+                        </div>
+                        <div class="form-group">
+                            <label for="phone2">Phone 2</label>
+                            <input type="number" class="form-control" id="phone2" name="phone2" formControlName="phone2"
+                                placeholder="Enter Phone 2" />
+                        </div>
+                        <div class="form-group">
+                            <label for="phone3">Phone 3</label>
+                            <input type="number" class="form-control" id="phone3" name="phone3" formControlName="phone3"
+                                placeholder="Enter Phone 3" />
+                        </div>
+                        <div class="form-group">
+                            <label for="group">Group</label>
+                            <select class="form-control" id="group" required ngModel name="group"
+                                formControlName="group">
+                                <option value="" disabled selected hidden>Choose...</option>
+                                <option *ngFor="let item of groups" value="{{ item.id }}">
+                                    {{ item.Name }}
+                                </option>
+                            </select>
+                        </div>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                            Close
+                        </button>
+                        <button type="submit" class="btn btn-primary ml-2" [disabled]="btnLoading || !agentForm.valid">
+                            <span *ngIf="btnLoading" class="spinner-border spinner-border-sm" role="status"
+                                aria-hidden="true"></span>
+                            Save changes
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <div bsModal #commentModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Add Comment</h4>
+                    <button type="button" class="close" (click)="commentModal.hide()" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form [formGroup]="commentForm" (ngSubmit)="CommentSubmit()">
+                        <div class="form-group">
+                            <label for="name">Remarks</label>
+                            <textarea class="form-control" maxlength="250" id="RemarksText" name="RemarksText"
+                                formControlName="RemarksText" placeholder="Enter remarks"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Date</label>
+                            <input type="datetime-local" class="form-control" id="event_date_time"
+                                name="event_date_time" formControlName="event_date_time" />
+                        </div>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                            Close
+                        </button>
+                        <button type="submit" class="btn btn-primary ml-2"
+                            [disabled]="btnLoading || !commentForm.valid">
+                            <span *ngIf="btnLoading" class="spinner-border spinner-border-sm" role="status"
+                                aria-hidden="true"></span>
+                            Save changes
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+</div>

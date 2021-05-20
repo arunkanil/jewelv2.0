@@ -16,6 +16,7 @@
     "lib": [
       "esnext",
       "dom"
-    ]
+    ],
+    "allowSyntheticDefaultImports": true
   }
 }

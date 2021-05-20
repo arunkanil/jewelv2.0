@@ -15,30 +15,30 @@ export const navItems: INavData[] = [
   //   name: 'Theme'
   // },
   {
-    name: 'Order Processing',
+    name: 'Agents',
     url: '/order/order_processing',
     icon: 'icon-note'
   },
   {
-    name: 'Ready for Delivery',
+    name: 'Customers',
     url: '/order/ready_for_delivery',
     icon: 'icon-basket-loaded'
   },
-  {
-    name: 'All Orders',
-    url: '/order/all_orders',
-    icon: 'icon-notebook'
-  },
-  {
-    name: 'Contact',
-    url: '/contact/contact_form',
-    icon: 'icon-phone'
-  },
-  {
-    name: 'Profile',
-    url: '/profile/view_profile',
-    icon: 'icon-user'
-  },
+  // {
+  //   name: 'All Orders',
+  //   url: '/order/all_orders',
+  //   icon: 'icon-notebook'
+  // },
+  // {
+  //   name: 'Contact',
+  //   url: '/contact/contact_form',
+  //   icon: 'icon-phone'
+  // },
+  // {
+  //   name: 'Profile',
+  //   url: '/profile/view_profile',
+  //   icon: 'icon-user'
+  // },
   // {
   //   title: true,
   //   name: 'Components'

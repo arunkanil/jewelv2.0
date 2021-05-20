@@ -1,15 +1,15 @@
 // Angular
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import {IvyCarouselModule} from 'angular-responsive-carousel';
 
-import { ReadyForDeliveryComponent } from './readyfordelivery.component';
+import { CustomersComponent } from './readyfordelivery.component';
 
 // Forms Component
 import { AllOrdersComponent } from './allorders.component';
-import { NewOrdersComponent } from './neworders.component';
-
+import { AgentsComponent } from './neworders.component';
+import { AgentDetailComponent } from './agentdetail.component';
 // Tabs Component
 import { TabsModule } from 'ngx-bootstrap/tabs';
 
@@ -36,11 +36,16 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
 
 // Components Routing
 import { BaseRoutingModule } from './base-routing.module';
+import { AgGridModule } from 'ag-grid-angular';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { CustomerDetailComponent } from './customerdetail.component';
 
 @NgModule({
   imports: [
     CommonModule,
+    AgGridModule.withComponents([]),
     FormsModule,
+    ReactiveFormsModule,
     BaseRoutingModule,
     BsDropdownModule.forRoot(),
     TabsModule,
@@ -50,12 +55,15 @@ import { BaseRoutingModule } from './base-routing.module';
     PaginationModule.forRoot(),
     PopoverModule.forRoot(),
     ProgressbarModule.forRoot(),
-    TooltipModule.forRoot()
+    TooltipModule.forRoot(),
+    ModalModule.forRoot()
   ],
   declarations: [
-    ReadyForDeliveryComponent,
+    CustomersComponent,
     AllOrdersComponent,
-    NewOrdersComponent,
+    AgentsComponent,
+    AgentDetailComponent,
+    CustomerDetailComponent
   ]
 })
 export class BaseModule { }
