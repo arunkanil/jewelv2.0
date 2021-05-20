@@ -6007,7 +6007,7 @@
           path: 'ready_for_delivery',
           component: _readyfordelivery_component__WEBPACK_IMPORTED_MODULE_3__["CustomersComponent"],
           data: {
-            title: 'Ready for Delivery'
+            title: 'Customers'
           }
         }, {
           path: 'order_processing',

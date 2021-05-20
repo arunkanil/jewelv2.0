@@ -19,7 +19,7 @@ const routes: Routes = [
         path: 'ready_for_delivery',
         component: CustomersComponent,
         data: {
-          title: 'Ready for Delivery'
+          title: 'Customers'
         }
       },
       {
