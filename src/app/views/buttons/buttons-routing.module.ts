@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { ButtonsComponent } from './buttons.component';
 import { DropdownsComponent } from './dropdowns.component';
 import { BrandButtonsComponent } from './brand-buttons.component';
+import { KPCustomerDetailComponent } from './customerdetail.component';
 
 const routes: Routes = [
   {
@@ -12,29 +13,36 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'buttons'
+        redirectTo: 'kpcaller'
       },
       {
-        path: 'view_profile',
+        path: 'verification',
         component: ButtonsComponent,
         data: {
           title: 'Profile'
         }
       },
       {
-        path: 'dropdowns',
+        path: 'assigned',
         component: DropdownsComponent,
         data: {
           title: 'Dropdowns'
         }
       },
       {
-        path: 'brand-buttons',
+        path: 'dnf',
         component: BrandButtonsComponent,
         data: {
           title: 'Brand buttons'
         }
-      }
+      },
+      {
+        path: 'kp_customer_details/:id',
+        component: KPCustomerDetailComponent,
+        data: {
+          title: 'Customer Details'
+        }
+      },
     ]
   }
 ];

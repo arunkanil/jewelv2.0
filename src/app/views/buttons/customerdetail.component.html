@@ -1,0 +1,122 @@
+<div class="animated fadeIn">
+    <div class="card">
+        <div class="card-header" style="display: flex; justify-content: space-between">
+            <h2>Customer Details</h2>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col">
+                    <table class="table table-striped">
+                        <tbody>
+                            <tr>
+                                <td>ID</td>
+                                <td>{{details?.id}}</td>
+                            </tr>
+                            <tr>
+                                <td>Name Of Father</td>
+                                <td>{{details?.NameOfBride}}</td>
+                            </tr>
+                            <tr>
+                                <td>Name Of Father</td>
+                                <td>{{details?.NameOfFather}}</td>
+                            </tr>
+                            <tr>
+                                <td>Name Of Mother</td>
+                                <td>{{ details?.NameOfMother }}</td>
+                            </tr>
+                            <tr>
+                                <td>Marriage Date</td>
+                                <td>{{ details?.MarriageDate }}</td>
+                            </tr>
+                            <tr>
+                                <td>Marriage Month</td>
+                                <td>{{ details?.MarriageMonth }}</td>
+                            </tr>
+                            <tr>
+                                <td>Agent</td>
+                                <td>
+                                    <span class="badge badge-warning">{{ details.tele_caller_contact?.Name }}</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>House Name</td>
+                                <td>{{ details.Address?.HouseName }}</td>
+                            </tr>
+                            <tr>
+                                <td>Landmark</td>
+                                <td>{{ details.Address?.Landmark }}</td>
+                            </tr>
+                            <tr>
+                                <td>Locality</td>
+                                <td>{{ details.Address?.locality?.Name }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col">
+                    <div class="card" *ngFor="let item of details.TelecallerRemarks">
+                        <div class="card-body">
+                            <h5 class="card-title">{{item.CallHistory.event_date_time}}</h5>
+                            <p class="card-text">{{item.RemarksText}}</p>
+                            <span
+                                class="badge badge-primary">{{item.CallHistory.users_permissions_user.username}}</span>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" (click)="commentModal.show()">
+                        Add Comment
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div bsModal #commentModal="bs-modal" class="modal fade" tabindex="-1" role="dialog"
+            aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Add Comment</h4>
+                        <button type="button" class="close" (click)="commentModal.hide()" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form [formGroup]="commentForm" (ngSubmit)="CommentSubmit()">
+                            <div class="form-group">
+                                <label for="name">Remarks</label>
+                                <textarea class="form-control" maxlength="250" id="RemarksText" name="RemarksText"
+                                    formControlName="RemarksText" placeholder="Enter remarks"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Date</label>
+                                <input type="datetime-local" class="form-control" id="event_date_time"
+                                    name="event_date_time" formControlName="event_date_time" />
+                            </div>
+                            <div class="form-group">
+                                <!-- <input type="checkbox" class="form-control" id="is_verified" name="is_verified"
+                                    formControlName="is_verified" />
+                                <label for="is_verified">Verification</label> -->
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" value="true" id="is_verified" name="is_verified"
+                                            formControlName="is_verified">
+                                        Customer Verified
+                                    </label>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                Close
+                            </button>
+                            <button type="submit" class="btn btn-primary ml-2"
+                                [disabled]="btnLoading || !commentForm.valid">
+                                <span *ngIf="btnLoading" class="spinner-border spinner-border-sm" role="status"
+                                    aria-hidden="true"></span>
+                                Save changes
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+    </div>
+</div>

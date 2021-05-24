@@ -10,10 +10,6 @@ export const navItems: INavData[] = [
       text: 'NEW'
     }
   },
-  // {
-  //   title: true,
-  //   name: 'Theme'
-  // },
   {
     name: 'Agents',
     url: '/order/order_processing',
@@ -23,6 +19,21 @@ export const navItems: INavData[] = [
     name: 'Customers',
     url: '/order/ready_for_delivery',
     icon: 'icon-basket-loaded'
+  },
+  {
+    name: 'Verification',
+    url: '/kpcaller/verification',
+    icon: 'icon-cursor'
+  },
+  {
+    name: 'Assigned',
+    url: '/kpcaller/assigned',
+    icon: 'icon-cursor'
+  },
+  {
+    name: 'DNF',
+    url: '/kpcaller/dnf',
+    icon: 'icon-cursor'
   },
   // {
   //   name: 'All Orders',
@@ -111,28 +122,7 @@ export const navItems: INavData[] = [
   //     }
   //   ]
   // },
-  // {
-  //   name: 'Buttons',
-  //   url: '/buttons',
-  //   icon: 'icon-cursor',
-  //   children: [
-  //     {
-  //       name: 'Buttons',
-  //       url: '/buttons/buttons',
-  //       icon: 'icon-cursor'
-  //     },
-  //     {
-  //       name: 'Dropdowns',
-  //       url: '/buttons/dropdowns',
-  //       icon: 'icon-cursor'
-  //     },
-  //     {
-  //       name: 'Brand Buttons',
-  //       url: '/buttons/brand-buttons',
-  //       icon: 'icon-cursor'
-  //     }
-  //   ]
-  // },
+  
   // {
   //   name: 'Charts',
   //   url: '/charts',

@@ -665,6 +665,43 @@ const CustomersQuery = apollo_angular__WEBPACK_IMPORTED_MODULE_4__["gql"] `
     }
   }
 `;
+const CustomersFilterQuery = apollo_angular__WEBPACK_IMPORTED_MODULE_4__["gql"] `
+  query($is_verified:Boolean) {
+    customers(where: { is_verified: $is_verified }) {
+      id
+      NameOfBride
+      NameOfFather
+      NameOfMother
+      MarriageDate
+      MarriageMonth
+      tele_caller_contact {
+        Name
+        id
+      }
+      created_at
+      Address {
+        id
+        HouseName
+        Landmark
+        locality {
+          Name
+        }
+        post_office {
+          Name
+          Pincode
+          district {
+            Name
+          }
+        }
+        GeoLocation {
+          Latitude
+          Longitude
+          GoogleMapURL
+        }
+      }
+    }
+  }
+`;
 const CustomerSingleQuery = apollo_angular__WEBPACK_IMPORTED_MODULE_4__["gql"] `
 query($id: ID!) {
   customer(id: $id) {
@@ -923,6 +960,14 @@ let DataService = class DataService {
     getCustomers() {
         return this.apollo.watchQuery({
             query: CustomersQuery,
+        });
+    }
+    getCustomersFilter(verified) {
+        return this.apollo.watchQuery({
+            query: CustomersFilterQuery,
+            variables: {
+                is_verified: verified,
+            },
         });
     }
     getSingleCustomer(id) {
@@ -1533,15 +1578,15 @@ const routes = [
         children: [
             {
                 path: 'order',
-                loadChildren: () => Promise.all(/*! import() | views-base-base-module */[__webpack_require__.e("default~views-base-base-module~views-theme-theme-module"), __webpack_require__.e("default~views-base-base-module~views-notifications-notifications-module"), __webpack_require__.e("views-base-base-module")]).then(__webpack_require__.bind(null, /*! ./views/base/base.module */ "Cvcy")).then(m => m.BaseModule)
+                loadChildren: () => Promise.all(/*! import() | views-base-base-module */[__webpack_require__.e("default~views-base-base-module~views-buttons-buttons-module~views-notifications-notifications-module"), __webpack_require__.e("default~views-base-base-module~views-theme-theme-module"), __webpack_require__.e("common"), __webpack_require__.e("views-base-base-module")]).then(__webpack_require__.bind(null, /*! ./views/base/base.module */ "Cvcy")).then(m => m.BaseModule)
             },
             {
                 path: 'contact',
                 loadChildren: () => Promise.all(/*! import() | views-theme-theme-module */[__webpack_require__.e("default~views-dashboard-dashboard-module~views-theme-theme-module~views-widgets-widgets-module"), __webpack_require__.e("default~views-base-base-module~views-theme-theme-module"), __webpack_require__.e("views-theme-theme-module")]).then(__webpack_require__.bind(null, /*! ./views/theme/theme.module */ "AgMk")).then(m => m.ThemeModule)
             },
             {
-                path: 'profile',
-                loadChildren: () => __webpack_require__.e(/*! import() | views-buttons-buttons-module */ "views-buttons-buttons-module").then(__webpack_require__.bind(null, /*! ./views/buttons/buttons.module */ "Reju")).then(m => m.ButtonsModule)
+                path: 'kpcaller',
+                loadChildren: () => Promise.all(/*! import() | views-buttons-buttons-module */[__webpack_require__.e("default~views-base-base-module~views-buttons-buttons-module~views-notifications-notifications-module"), __webpack_require__.e("common"), __webpack_require__.e("views-buttons-buttons-module")]).then(__webpack_require__.bind(null, /*! ./views/buttons/buttons.module */ "Reju")).then(m => m.ButtonsModule)
             },
             {
                 path: 'charts',
@@ -1557,7 +1602,7 @@ const routes = [
             },
             {
                 path: 'notifications',
-                loadChildren: () => Promise.all(/*! import() | views-notifications-notifications-module */[__webpack_require__.e("default~views-base-base-module~views-notifications-notifications-module"), __webpack_require__.e("views-notifications-notifications-module")]).then(__webpack_require__.bind(null, /*! ./views/notifications/notifications.module */ "KpDv")).then(m => m.NotificationsModule)
+                loadChildren: () => Promise.all(/*! import() | views-notifications-notifications-module */[__webpack_require__.e("default~views-base-base-module~views-buttons-buttons-module~views-notifications-notifications-module"), __webpack_require__.e("views-notifications-notifications-module")]).then(__webpack_require__.bind(null, /*! ./views/notifications/notifications.module */ "KpDv")).then(m => m.NotificationsModule)
             },
             {
                 path: 'widgets',
@@ -1600,10 +1645,6 @@ const navItems = [
             text: 'NEW'
         }
     },
-    // {
-    //   title: true,
-    //   name: 'Theme'
-    // },
     {
         name: 'Agents',
         url: '/order/order_processing',
@@ -1613,6 +1654,21 @@ const navItems = [
         name: 'Customers',
         url: '/order/ready_for_delivery',
         icon: 'icon-basket-loaded'
+    },
+    {
+        name: 'Verification',
+        url: '/kpcaller/verification',
+        icon: 'icon-cursor'
+    },
+    {
+        name: 'Assigned',
+        url: '/kpcaller/assigned',
+        icon: 'icon-cursor'
+    },
+    {
+        name: 'DNF',
+        url: '/kpcaller/dnf',
+        icon: 'icon-cursor'
     },
 ];
 
@@ -1718,12 +1774,12 @@ let AuthGuard = class AuthGuard {
             console.log(currentUser, 'authguard', route.data.roles);
             // check if route is restricted by role
             if (route.data.roles &&
-                route.data.roles.indexOf(currentUser.user.employee_type.name) === -1) {
+                route.data.roles.indexOf(currentUser.user.UserType) === -1) {
                 // role not authorised so redirect to home page
                 this.router.navigate(['/']);
+                console.log('authguard failed');
                 return false;
             }
-            console.log('authguard failed');
             // authorised so return true
             return true;
         }

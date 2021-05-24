@@ -6,6 +6,7 @@ import { AllOrdersComponent } from './allorders.component';
 import { AgentsComponent } from './neworders.component';
 import { AgentDetailComponent } from './agentdetail.component';
 import { CustomerDetailComponent } from './customerdetail.component';
+import { AuthGuard } from '../login/auth.guard';
 
 const routes: Routes = [
   {
@@ -17,15 +18,19 @@ const routes: Routes = [
       },
       {
         path: 'ready_for_delivery',
+        canActivate: [AuthGuard],
         component: CustomersComponent,
         data: {
+          roles: 'TELE_CALLER',
           title: 'Customers'
         }
       },
       {
         path: 'order_processing',
+        canActivate: [AuthGuard],
         component: AgentsComponent,
         data: {
+          roles: 'TELE_CALLER',
           title: 'Agents'
         }
       },

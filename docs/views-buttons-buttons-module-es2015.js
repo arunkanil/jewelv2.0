@@ -44,6 +44,114 @@ BrandButtonsComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])
 
 /***/ }),
 
+/***/ "NBjn":
+/*!***********************************************************!*\
+  !*** ./src/app/views/buttons/customerdetail.component.ts ***!
+  \***********************************************************/
+/*! exports provided: KPCustomerDetailComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "KPCustomerDetailComponent", function() { return KPCustomerDetailComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "mrSG");
+/* harmony import */ var _raw_loader_customerdetail_component_html__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! raw-loader!./customerdetail.component.html */ "OTGb");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "8Y7J");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "iInd");
+/* harmony import */ var ngx_bootstrap_modal__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ngx-bootstrap/modal */ "LqlI");
+/* harmony import */ var _data_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../data.service */ "R7Hv");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/forms */ "s7LF");
+
+
+
+
+
+
+
+let KPCustomerDetailComponent = class KPCustomerDetailComponent {
+    constructor(dataservice, activatedRouter, fb) {
+        this.dataservice = dataservice;
+        this.activatedRouter = activatedRouter;
+        this.fb = fb;
+        this.loading = true;
+        this.details = [];
+        this.btnLoading = false;
+        this.groups = [];
+        this.commentForm = this.fb.group({
+            RemarksText: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_6__["Validators"].required],
+            event_date_time: ["", _angular_forms__WEBPACK_IMPORTED_MODULE_6__["Validators"].required],
+            is_verified: [false],
+        });
+    }
+    ngOnInit() {
+        this.getLists();
+        this.activatedRouter.params.subscribe((params) => {
+            this.id = params["id"];
+        });
+        this.dataservice.getSingleCustomer(this.id).valueChanges.subscribe((result) => {
+            console.log("getSingleCustomer", result.data.customer);
+            this.details = result.data.customer;
+            this.loading = false;
+        });
+    }
+    getLists() {
+        this.loading = true;
+        this.dataservice.getGroups().valueChanges.subscribe((result) => {
+            console.log("getGroups", result.data.groups);
+            this.groups = result.data.groups;
+        });
+    }
+    CommentSubmit() {
+        let resp = {};
+        console.log(this.commentForm.value);
+        // this.dataservice
+        //   .AddCustomerComment(this.details.id, this.commentForm.value)
+        //   .subscribe((result: any) => {
+        //     resp = result.data;
+        //     console.log("response", result);
+        //     if (result.data.updateCustomer) {
+        //       alert("Comment added successfully!");
+        //       this.commentModal.hide();
+        //     } else {
+        //       alert("Failed. Please check the fields!");
+        //     }
+        //   });
+    }
+};
+KPCustomerDetailComponent.ctorParameters = () => [
+    { type: _data_service__WEBPACK_IMPORTED_MODULE_5__["DataService"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"] },
+    { type: _angular_forms__WEBPACK_IMPORTED_MODULE_6__["FormBuilder"] }
+];
+KPCustomerDetailComponent.propDecorators = {
+    commentModal: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_2__["ViewChild"], args: ["commentModal",] }]
+};
+KPCustomerDetailComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({
+        template: _raw_loader_customerdetail_component_html__WEBPACK_IMPORTED_MODULE_1__["default"],
+    }),
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_data_service__WEBPACK_IMPORTED_MODULE_5__["DataService"],
+        _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"],
+        _angular_forms__WEBPACK_IMPORTED_MODULE_6__["FormBuilder"]])
+], KPCustomerDetailComponent);
+
+
+
+/***/ }),
+
+/***/ "OTGb":
+/*!***************************************************************************************************!*\
+  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/views/buttons/customerdetail.component.html ***!
+  \***************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"animated fadeIn\">\r\n    <div class=\"card\">\r\n        <div class=\"card-header\" style=\"display: flex; justify-content: space-between\">\r\n            <h2>Customer Details</h2>\r\n        </div>\r\n        <div class=\"card-body\">\r\n            <div class=\"row\">\r\n                <div class=\"col\">\r\n                    <table class=\"table table-striped\">\r\n                        <tbody>\r\n                            <tr>\r\n                                <td>ID</td>\r\n                                <td>{{details?.id}}</td>\r\n                            </tr>\r\n                            <tr>\r\n                                <td>Name Of Father</td>\r\n                                <td>{{details?.NameOfBride}}</td>\r\n                            </tr>\r\n                            <tr>\r\n                                <td>Name Of Father</td>\r\n                                <td>{{details?.NameOfFather}}</td>\r\n                            </tr>\r\n                            <tr>\r\n                                <td>Name Of Mother</td>\r\n                                <td>{{ details?.NameOfMother }}</td>\r\n                            </tr>\r\n                            <tr>\r\n                                <td>Marriage Date</td>\r\n                                <td>{{ details?.MarriageDate }}</td>\r\n                            </tr>\r\n                            <tr>\r\n                                <td>Marriage Month</td>\r\n                                <td>{{ details?.MarriageMonth }}</td>\r\n                            </tr>\r\n                            <tr>\r\n                                <td>Agent</td>\r\n                                <td>\r\n                                    <span class=\"badge badge-warning\">{{ details.tele_caller_contact?.Name }}</span>\r\n                                </td>\r\n                            </tr>\r\n                            <tr>\r\n                                <td>House Name</td>\r\n                                <td>{{ details.Address?.HouseName }}</td>\r\n                            </tr>\r\n                            <tr>\r\n                                <td>Landmark</td>\r\n                                <td>{{ details.Address?.Landmark }}</td>\r\n                            </tr>\r\n                            <tr>\r\n                                <td>Locality</td>\r\n                                <td>{{ details.Address?.locality?.Name }}</td>\r\n                            </tr>\r\n                        </tbody>\r\n                    </table>\r\n                </div>\r\n                <div class=\"col\">\r\n                    <div class=\"card\" *ngFor=\"let item of details.TelecallerRemarks\">\r\n                        <div class=\"card-body\">\r\n                            <h5 class=\"card-title\">{{item.CallHistory.event_date_time}}</h5>\r\n                            <p class=\"card-text\">{{item.RemarksText}}</p>\r\n                            <span\r\n                                class=\"badge badge-primary\">{{item.CallHistory.users_permissions_user.username}}</span>\r\n                        </div>\r\n                    </div>\r\n                    <button type=\"button\" class=\"btn btn-primary\" data-toggle=\"modal\" (click)=\"commentModal.show()\">\r\n                        Add Comment\r\n                    </button>\r\n                </div>\r\n            </div>\r\n        </div>\r\n        <div bsModal #commentModal=\"bs-modal\" class=\"modal fade\" tabindex=\"-1\" role=\"dialog\"\r\n            aria-labelledby=\"myModalLabel\" aria-hidden=\"true\">\r\n            <div class=\"modal-dialog modal-dialog-centered\" role=\"document\">\r\n                <div class=\"modal-content\">\r\n                    <div class=\"modal-header\">\r\n                        <h4 class=\"modal-title\">Add Comment</h4>\r\n                        <button type=\"button\" class=\"close\" (click)=\"commentModal.hide()\" aria-label=\"Close\">\r\n                            <span aria-hidden=\"true\">&times;</span>\r\n                        </button>\r\n                    </div>\r\n                    <div class=\"modal-body\">\r\n                        <form [formGroup]=\"commentForm\" (ngSubmit)=\"CommentSubmit()\">\r\n                            <div class=\"form-group\">\r\n                                <label for=\"name\">Remarks</label>\r\n                                <textarea class=\"form-control\" maxlength=\"250\" id=\"RemarksText\" name=\"RemarksText\"\r\n                                    formControlName=\"RemarksText\" placeholder=\"Enter remarks\"></textarea>\r\n                            </div>\r\n                            <div class=\"form-group\">\r\n                                <label for=\"email\">Date</label>\r\n                                <input type=\"datetime-local\" class=\"form-control\" id=\"event_date_time\"\r\n                                    name=\"event_date_time\" formControlName=\"event_date_time\" />\r\n                            </div>\r\n                            <div class=\"form-group\">\r\n                                <!-- <input type=\"checkbox\" class=\"form-control\" id=\"is_verified\" name=\"is_verified\"\r\n                                    formControlName=\"is_verified\" />\r\n                                <label for=\"is_verified\">Verification</label> -->\r\n                                <div class=\"checkbox\">\r\n                                    <label>\r\n                                        <input type=\"checkbox\" value=\"true\" id=\"is_verified\" name=\"is_verified\"\r\n                                            formControlName=\"is_verified\">\r\n                                        Customer Verified\r\n                                    </label>\r\n                                </div>\r\n                            </div>\r\n                            <button type=\"button\" class=\"btn btn-secondary\" data-dismiss=\"modal\">\r\n                                Close\r\n                            </button>\r\n                            <button type=\"submit\" class=\"btn btn-primary ml-2\"\r\n                                [disabled]=\"btnLoading || !commentForm.valid\">\r\n                                <span *ngIf=\"btnLoading\" class=\"spinner-border spinner-border-sm\" role=\"status\"\r\n                                    aria-hidden=\"true\"></span>\r\n                                Save changes\r\n                            </button>\r\n                        </form>\r\n                    </div>\r\n                </div>\r\n                <!-- /.modal-content -->\r\n            </div>\r\n            <!-- /.modal-dialog -->\r\n        </div>\r\n    </div>\r\n</div>");
+
+/***/ }),
+
 /***/ "QF1n":
 /*!******************************************************!*\
   !*** ./src/app/views/buttons/dropdowns.component.ts ***!
@@ -127,6 +235,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var ngx_bootstrap_dropdown__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ngx-bootstrap/dropdown */ "FE24");
 /* harmony import */ var _dropdowns_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./dropdowns.component */ "QF1n");
 /* harmony import */ var _buttons_routing_module__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./buttons-routing.module */ "bAeT");
+/* harmony import */ var ag_grid_angular__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ag-grid-angular */ "YFAK");
+/* harmony import */ var ngx_bootstrap_modal__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ngx-bootstrap/modal */ "LqlI");
+/* harmony import */ var _customerdetail_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./customerdetail.component */ "NBjn");
 
 
 
@@ -139,20 +250,27 @@ __webpack_require__.r(__webpack_exports__);
 // Buttons Routing
 
 // Angular
+
+
+
 let ButtonsModule = class ButtonsModule {
 };
 ButtonsModule = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_3__["NgModule"])({
         imports: [
             _angular_common__WEBPACK_IMPORTED_MODULE_1__["CommonModule"],
+            _angular_forms__WEBPACK_IMPORTED_MODULE_2__["ReactiveFormsModule"],
+            ag_grid_angular__WEBPACK_IMPORTED_MODULE_9__["AgGridModule"].withComponents([]),
             _buttons_routing_module__WEBPACK_IMPORTED_MODULE_8__["ButtonsRoutingModule"],
             ngx_bootstrap_dropdown__WEBPACK_IMPORTED_MODULE_6__["BsDropdownModule"].forRoot(),
+            ngx_bootstrap_modal__WEBPACK_IMPORTED_MODULE_10__["ModalModule"].forRoot(),
             _angular_forms__WEBPACK_IMPORTED_MODULE_2__["FormsModule"]
         ],
         declarations: [
             _buttons_component__WEBPACK_IMPORTED_MODULE_4__["ButtonsComponent"],
             _dropdowns_component__WEBPACK_IMPORTED_MODULE_7__["DropdownsComponent"],
-            _brand_buttons_component__WEBPACK_IMPORTED_MODULE_5__["BrandButtonsComponent"]
+            _brand_buttons_component__WEBPACK_IMPORTED_MODULE_5__["BrandButtonsComponent"],
+            _customerdetail_component__WEBPACK_IMPORTED_MODULE_11__["KPCustomerDetailComponent"]
         ]
     })
 ], ButtonsModule);
@@ -190,6 +308,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _buttons_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./buttons.component */ "xtqT");
 /* harmony import */ var _dropdowns_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./dropdowns.component */ "QF1n");
 /* harmony import */ var _brand_buttons_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./brand-buttons.component */ "5EjJ");
+/* harmony import */ var _customerdetail_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./customerdetail.component */ "NBjn");
+
 
 
 
@@ -202,29 +322,36 @@ const routes = [
         children: [
             {
                 path: '',
-                redirectTo: 'buttons'
+                redirectTo: 'kpcaller'
             },
             {
-                path: 'view_profile',
+                path: 'verification',
                 component: _buttons_component__WEBPACK_IMPORTED_MODULE_3__["ButtonsComponent"],
                 data: {
                     title: 'Profile'
                 }
             },
             {
-                path: 'dropdowns',
+                path: 'assigned',
                 component: _dropdowns_component__WEBPACK_IMPORTED_MODULE_4__["DropdownsComponent"],
                 data: {
                     title: 'Dropdowns'
                 }
             },
             {
-                path: 'brand-buttons',
+                path: 'dnf',
                 component: _brand_buttons_component__WEBPACK_IMPORTED_MODULE_5__["BrandButtonsComponent"],
                 data: {
                     title: 'Brand buttons'
                 }
-            }
+            },
+            {
+                path: 'kp_customer_details/:id',
+                component: _customerdetail_component__WEBPACK_IMPORTED_MODULE_6__["KPCustomerDetailComponent"],
+                data: {
+                    title: 'Customer Details'
+                }
+            },
         ]
     }
 ];
@@ -263,7 +390,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"animated fadeIn\">\n  <div class=\"card\">\n    <div class=\"card-header\">\n      <h2>Profile</h2>\n    </div>\n    <div class=\"card-body\">\n      <form>\n        <div class=\"form-row\">\n          <div class=\"form-group col-md-6\">\n            <label for=\"shopName\"><strong>Name of the Shop</strong></label>\n            <input type=\"text\" class=\"form-control\" id=\"shopName\">\n          </div>\n          <div class=\"form-group col-md-6\">\n            <label for=\"contactNumber\"><strong>Customer contact number</strong></label>\n            <input type=\"number\" class=\"form-control\" id=\"contactNumber\">\n          </div>\n        </div>\n        <div class=\"form-group\">\n          <label for=\"address\"><strong>Address</strong></label>\n          <input type=\"text\" class=\"form-control\" id=\"address\" placeholder=\"1234 Main St\">\n        </div>\n        <div class=\"form-row\">\n          <div class=\"form-group col-md-6\">\n            <label for=\"city\"><strong>City</strong></label>\n            <input type=\"text\" class=\"form-control\" id=\"city\">\n          </div>\n          <div class=\"form-group col-md-4\">\n            <label for=\"state\"><strong>State</strong></label>\n            <select id=\"state\" class=\"form-control\">\n              <option selected>Choose...</option>\n              <option>...</option>\n            </select>\n          </div>\n          <div class=\"form-group col-md-2\">\n            <label for=\"pincode\"><strong>Pin code</strong></label>\n            <input type=\"text\" class=\"form-control\" id=\"pincode\">\n          </div>\n        </div>\n        <div class=\"form-group\">\n          <label for=\"gmapLink\"><strong>Google map link</strong></label>\n          <input type=\"text\" class=\"form-control\" id=\"gmapLink\" placeholder=\"Apartment, studio, or floor\">\n        </div>\n        <div class=\"form-row\">\n          <div class=\"form-group col-md-4\">\n            <label for=\"latitude\"><strong>Latitude</strong></label>\n            <input type=\"text\" class=\"form-control\" id=\"latitude\">\n          </div>\n          <div class=\"form-group col-md-4\">\n            <label for=\"longitude\"><strong>Longitude</strong></label>\n            <input type=\"text\" class=\"form-control\" id=\"longitude\">\n          </div>\n        </div>\n        <div class=\"form-group\">\n          <label for=\"logo\"><strong>Logo</strong></label>\n          <div class=\"custom-file\">\n            <input type=\"file\" class=\"custom-file-input\" id=\"customFile\">\n            <label class=\"custom-file-label\" for=\"customFile\">Choose file</label>\n          </div>\n        </div>\n        <button type=\"submit\" class=\"btn btn-primary\">Save</button>\n      </form>\n    </div>\n  </div>\n</div>\n");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"animated fadeIn\">\n  <div class=\"card\">\n    <div class=\"card-header\" style=\"display: flex; justify-content: space-between\">\n      <h2>Verification List</h2>\n    </div>\n    <div class=\"card-body\">\n      <div class=\"row\">\n        <div class=\"col-12\">\n          <ag-grid-angular #agGrid style=\"width: 100%; height: 500px\" id=\"myGrid\" class=\"ag-theme-alpine\"\n            [columnDefs]=\"columnDefs\" [rowData]=\"rowData\" [rowSelection]=\"rowSelection\"\n            (gridReady)=\"onGridReady($event)\" (selectionChanged)=\"onSelectionChanged($event)\" animateRows=\"true\">\n          </ag-grid-angular>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>");
 
 /***/ }),
 
@@ -280,18 +407,59 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "mrSG");
 /* harmony import */ var _raw_loader_buttons_component_html__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! raw-loader!./buttons.component.html */ "sgt0");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/core */ "8Y7J");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "iInd");
+/* harmony import */ var _data_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../data.service */ "R7Hv");
+/* harmony import */ var _constants_columnMetadata__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../constants/columnMetadata */ "7nfi");
+
+
+
 
 
 
 let ButtonsComponent = class ButtonsComponent {
-    constructor() { }
+    constructor(dataservice, router) {
+        this.dataservice = dataservice;
+        this.router = router;
+        this.loading = true;
+        this.btnLoading = false;
+        this.orders = {};
+        this.columnDefs = [];
+        this.rowData = [];
+        this.columnDefs = [..._constants_columnMetadata__WEBPACK_IMPORTED_MODULE_5__["customersColumn"]];
+        this.rowSelection = "single";
+    }
+    ngOnInit() {
+        this.getLists();
+    }
+    getLists() {
+        this.loading = true;
+        this.dataservice.getCustomersFilter(false).valueChanges.subscribe((result) => {
+            console.log("getCustomersFilter", result.data.customers);
+            this.rowData = result.data.customers;
+        });
+    }
+    onGridReady(params) {
+        this.gridApi = params.api;
+        this.gridColumnApi = params.columnApi;
+    }
+    onSelectionChanged(event) {
+        var selectedRows = this.gridApi.getSelectedRows();
+        console.log(selectedRows);
+        this.router.navigate(["/kpcaller/kp_customer_details", selectedRows[0].id], {
+            state: { data: selectedRows },
+        });
+    }
 };
-ButtonsComponent.ctorParameters = () => [];
+ButtonsComponent.ctorParameters = () => [
+    { type: _data_service__WEBPACK_IMPORTED_MODULE_4__["DataService"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"] }
+];
 ButtonsComponent = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["Component"])({
         template: _raw_loader_buttons_component_html__WEBPACK_IMPORTED_MODULE_1__["default"]
     }),
-    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [])
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"])("design:paramtypes", [_data_service__WEBPACK_IMPORTED_MODULE_4__["DataService"],
+        _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"]])
 ], ButtonsComponent);
 
 

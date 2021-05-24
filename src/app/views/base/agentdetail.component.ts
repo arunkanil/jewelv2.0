@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from "@angular/router";
 import { ModalDirective } from "ngx-bootstrap/modal";
 import { DataService } from "../../data.service";
 import { FormBuilder, Validators } from "@angular/forms";
+import { Months } from "../../constants/columnMetadata";
 
 @Component({
   templateUrl: "agentdetail.component.html",
@@ -13,16 +14,19 @@ export class AgentDetailComponent implements OnInit {
     private activatedRouter: ActivatedRoute,
     private router: Router,
     private fb: FormBuilder
-  ) {}
+  ) {this.Months = [...Months];}
   @ViewChild("myModal") public myModal: ModalDirective;
+  @ViewChild("customerModal") public customerModal: ModalDirective;
   @ViewChild("deleteModal") public deleteModal: ModalDirective;
   @ViewChild("commentModal") public commentModal: ModalDirective;
 
   id: any;
+  Months;
   loading = true;
   details: any = [];
   btnLoading = false;
   groups: any = [];
+  localities: any = [];
   agentForm = this.fb.group({
     name: ["", Validators.required],
     email: ["", Validators.required],
@@ -31,6 +35,7 @@ export class AgentDetailComponent implements OnInit {
     phone3: ["", Validators.required],
     group: ["", Validators.required],
   });
+  customerForm ;
   commentForm = this.fb.group({
     RemarksText: ["", Validators.required],
     event_date_time: ["", Validators.required],
@@ -54,12 +59,27 @@ export class AgentDetailComponent implements OnInit {
       });
       this.loading = false;
     });
+    this.customerForm = this.fb.group({
+      NameOfBride: ["", Validators.required],
+      NameOfFather: ["", Validators.required],
+      NameOfMother: ["", Validators.required],
+      MarriageDate: ["", Validators.required],
+      MarriageMonth: ["", Validators.required],
+      tele_caller_contact: [this.id, Validators.required],
+      HouseName: ["", Validators.required],
+      Landmark: ["", Validators.required],
+      locality: ["", Validators.required],
+    });
   }
   getLists() {
     this.loading = true;
     this.dataservice.getGroups().valueChanges.subscribe((result: any) => {
       console.log("getGroups", result.data.groups);
       this.groups = result.data.groups;
+    });
+    this.dataservice.getLocalities().valueChanges.subscribe((result: any) => {
+      console.log("getLocalities", result.data.localities);
+      this.localities = result.data.localities;
     });
   }
   FormSubmit() {
@@ -78,6 +98,22 @@ export class AgentDetailComponent implements OnInit {
         }
       });
   }
+  customerSubmit() {
+    let resp = {};
+    console.log(this.customerForm.value);
+    this.dataservice.Addcustomer(this.customerForm.value).subscribe((result: any) => {
+      resp = result.data;
+      console.log("response", result);
+      if (result.data.createCustomer) {
+        alert("customer added successfully!");
+        this.getLists();
+        this.customerModal.hide();
+      } else {
+        alert("Failed. Please check the fields!");
+      }
+    });
+  }
+  
   CommentSubmit() {
     let resp = {};
     console.log(this.commentForm.value);

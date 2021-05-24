@@ -232,6 +232,43 @@ const CustomersQuery = gql`
     }
   }
 `;
+const CustomersFilterQuery = gql`
+  query($is_verified:Boolean) {
+    customers(where: { is_verified: $is_verified }) {
+      id
+      NameOfBride
+      NameOfFather
+      NameOfMother
+      MarriageDate
+      MarriageMonth
+      tele_caller_contact {
+        Name
+        id
+      }
+      created_at
+      Address {
+        id
+        HouseName
+        Landmark
+        locality {
+          Name
+        }
+        post_office {
+          Name
+          Pincode
+          district {
+            Name
+          }
+        }
+        GeoLocation {
+          Latitude
+          Longitude
+          GoogleMapURL
+        }
+      }
+    }
+  }
+`;
 const CustomerSingleQuery = gql`
 query($id: ID!) {
   customer(id: $id) {
@@ -493,6 +530,14 @@ export class DataService {
   getCustomers() {
     return this.apollo.watchQuery({
       query: CustomersQuery,
+    });
+  }
+  getCustomersFilter(verified) {
+    return this.apollo.watchQuery({
+      query: CustomersFilterQuery,
+      variables: {
+        is_verified: verified,
+      },
     });
   }
   getSingleCustomer(id) {

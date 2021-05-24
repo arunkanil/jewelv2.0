@@ -1,5 +1,5 @@
 (function () {
-  var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12;
+  var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13;
 
   function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
@@ -770,9 +770,10 @@
       var DeleteAgentMutation = apollo_angular__WEBPACK_IMPORTED_MODULE_4__["gql"](_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  mutation ($id: ID!) {\n    deleteTeleCallerContact(input: { where: { id: $id } }) {\n      teleCallerContact {\n        id\n        Name\n        Contact_Number_1\n        Contact_Number_2\n        Contact_Number_3\n        group {\n          Name\n          Description\n        }\n        Email\n      }\n    }\n  }\n"])));
       var AddCommentMutation = apollo_angular__WEBPACK_IMPORTED_MODULE_4__["gql"](_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  mutation ($id: ID!, $remarks: String!, $date: DateTime!) {\n    updateTeleCallerContact(\n      input: {\n        where: { id: $id }\n        data: {\n          telecaller_remarks: {\n            RemarksText: $remarks\n            CallHistory: { event_date_time: $date }\n          }\n        }\n      }\n    ) {\n      teleCallerContact {\n        id\n        Name\n        Email\n        group {\n          Name\n          Description\n        }\n        Contact_Number_1\n        Contact_Number_2\n        Contact_Number_3\n        telecaller_remarks {\n          RemarksText\n          CallHistory {\n            event_date_time\n            users_permissions_user {\n              username\n            }\n          }\n        }\n      }\n    }\n  }\n"])));
       var CustomersQuery = apollo_angular__WEBPACK_IMPORTED_MODULE_4__["gql"](_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  query {\n    customers {\n      id\n      NameOfBride\n      NameOfFather\n      NameOfMother\n      MarriageDate\n      MarriageMonth\n      tele_caller_contact {\n        Name\n        id\n      }\n      created_at\n      Address {\n        id\n        HouseName\n        Landmark\n        locality {\n          Name\n        }\n        post_office {\n          Name\n          Pincode\n          district {\n            Name\n          }\n        }\n        GeoLocation {\n          Latitude\n          Longitude\n          GoogleMapURL\n        }\n      }\n    }\n  }\n"])));
-      var CustomerSingleQuery = apollo_angular__WEBPACK_IMPORTED_MODULE_4__["gql"](_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\nquery($id: ID!) {\n  customer(id: $id) {\n    id\n    NameOfBride\n    NameOfFather\n    NameOfMother\n    MarriageDate\n    MarriageMonth\n    tele_caller_contact{\n      Name\n      id\n    }\n    created_at\n    Address {\n      id\n      HouseName\n      Landmark\n      locality {\n        Name\n      }\n      post_office {\n        Name\n        Pincode\n        district {\n          Name\n        }\n      }\n      GeoLocation {\n        Latitude\n        Longitude\n        GoogleMapURL\n      }\n    }\n    TelecallerRemarks{\n      RemarksText\n      CallHistory{\n        event_date_time\n        users_permissions_user {\n          username\n          email\n        }\n      }\n    }\n  }\n}\n"])));
-      var AddCustomerMutation = apollo_angular__WEBPACK_IMPORTED_MODULE_4__["gql"](_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  mutation (\n    $NameOfBride: String!\n    $NameOfFather: String!\n    $NameOfMother: String!\n    $MarriageDate: Date!\n    $MarriageMonth: Int!\n    $tele_caller_contact: ID!\n    $HouseName: String!\n    $Landmark: String!\n    $locality: ID!\n  ) {\n    createCustomer(\n      input: {\n        data: {\n          NameOfBride: $NameOfBride\n          NameOfFather: $NameOfFather\n          NameOfMother: $NameOfMother\n          MarriageDate: $MarriageDate\n          MarriageMonth: $MarriageMonth\n          tele_caller_contact: $tele_caller_contact\n          Address: {\n            HouseName: $HouseName\n            Landmark: $Landmark\n            locality: $locality\n          }\n        }\n      }\n    ) {\n      customer {\n        id\n        NameOfBride\n        NameOfFather\n        NameOfMother\n        MarriageDate\n        MarriageMonth\n        tele_caller_contact {\n          Name\n          id\n        }\n        created_at\n        Address {\n          id\n          HouseName\n          Landmark\n          locality {\n            Name\n          }\n          post_office {\n            Name\n            Pincode\n            district {\n              Name\n            }\n          }\n          GeoLocation {\n            Latitude\n            Longitude\n            GoogleMapURL\n          }\n        }\n      }\n    }\n  }\n"])));
-      var AddCustomerCommentMutation = apollo_angular__WEBPACK_IMPORTED_MODULE_4__["gql"](_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\nmutation($id: ID!, $remarks: String!, $date: DateTime!) {\n  updateCustomer(\n    input: {\n      where: { id: $id }\n      data: {\n        TelecallerRemarks: {\n          RemarksText: $remarks\n          CallHistory: { event_date_time: $date }\n        }\n      }\n    }\n  ) {\n    customer {\n      id\n      NameOfBride\n      NameOfFather\n      NameOfMother\n      MarriageDate\n      MarriageMonth\n      tele_caller_contact {\n        Name\n        id\n      }\n      created_at\n      Address {\n        id\n        HouseName\n        Landmark\n        locality {\n          Name\n        }\n        post_office {\n          Name\n          Pincode\n          district {\n            Name\n          }\n        }\n        GeoLocation {\n          Latitude\n          Longitude\n          GoogleMapURL\n        }\n      }\n    }\n  }\n}"])));
+      var CustomersFilterQuery = apollo_angular__WEBPACK_IMPORTED_MODULE_4__["gql"](_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  query($is_verified:Boolean) {\n    customers(where: { is_verified: $is_verified }) {\n      id\n      NameOfBride\n      NameOfFather\n      NameOfMother\n      MarriageDate\n      MarriageMonth\n      tele_caller_contact {\n        Name\n        id\n      }\n      created_at\n      Address {\n        id\n        HouseName\n        Landmark\n        locality {\n          Name\n        }\n        post_office {\n          Name\n          Pincode\n          district {\n            Name\n          }\n        }\n        GeoLocation {\n          Latitude\n          Longitude\n          GoogleMapURL\n        }\n      }\n    }\n  }\n"])));
+      var CustomerSingleQuery = apollo_angular__WEBPACK_IMPORTED_MODULE_4__["gql"](_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\nquery($id: ID!) {\n  customer(id: $id) {\n    id\n    NameOfBride\n    NameOfFather\n    NameOfMother\n    MarriageDate\n    MarriageMonth\n    tele_caller_contact{\n      Name\n      id\n    }\n    created_at\n    Address {\n      id\n      HouseName\n      Landmark\n      locality {\n        Name\n      }\n      post_office {\n        Name\n        Pincode\n        district {\n          Name\n        }\n      }\n      GeoLocation {\n        Latitude\n        Longitude\n        GoogleMapURL\n      }\n    }\n    TelecallerRemarks{\n      RemarksText\n      CallHistory{\n        event_date_time\n        users_permissions_user {\n          username\n          email\n        }\n      }\n    }\n  }\n}\n"])));
+      var AddCustomerMutation = apollo_angular__WEBPACK_IMPORTED_MODULE_4__["gql"](_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  mutation (\n    $NameOfBride: String!\n    $NameOfFather: String!\n    $NameOfMother: String!\n    $MarriageDate: Date!\n    $MarriageMonth: Int!\n    $tele_caller_contact: ID!\n    $HouseName: String!\n    $Landmark: String!\n    $locality: ID!\n  ) {\n    createCustomer(\n      input: {\n        data: {\n          NameOfBride: $NameOfBride\n          NameOfFather: $NameOfFather\n          NameOfMother: $NameOfMother\n          MarriageDate: $MarriageDate\n          MarriageMonth: $MarriageMonth\n          tele_caller_contact: $tele_caller_contact\n          Address: {\n            HouseName: $HouseName\n            Landmark: $Landmark\n            locality: $locality\n          }\n        }\n      }\n    ) {\n      customer {\n        id\n        NameOfBride\n        NameOfFather\n        NameOfMother\n        MarriageDate\n        MarriageMonth\n        tele_caller_contact {\n          Name\n          id\n        }\n        created_at\n        Address {\n          id\n          HouseName\n          Landmark\n          locality {\n            Name\n          }\n          post_office {\n            Name\n            Pincode\n            district {\n              Name\n            }\n          }\n          GeoLocation {\n            Latitude\n            Longitude\n            GoogleMapURL\n          }\n        }\n      }\n    }\n  }\n"])));
+      var AddCustomerCommentMutation = apollo_angular__WEBPACK_IMPORTED_MODULE_4__["gql"](_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\nmutation($id: ID!, $remarks: String!, $date: DateTime!) {\n  updateCustomer(\n    input: {\n      where: { id: $id }\n      data: {\n        TelecallerRemarks: {\n          RemarksText: $remarks\n          CallHistory: { event_date_time: $date }\n        }\n      }\n    }\n  ) {\n    customer {\n      id\n      NameOfBride\n      NameOfFather\n      NameOfMother\n      MarriageDate\n      MarriageMonth\n      tele_caller_contact {\n        Name\n        id\n      }\n      created_at\n      Address {\n        id\n        HouseName\n        Landmark\n        locality {\n          Name\n        }\n        post_office {\n          Name\n          Pincode\n          district {\n            Name\n          }\n        }\n        GeoLocation {\n          Latitude\n          Longitude\n          GoogleMapURL\n        }\n      }\n    }\n  }\n}"])));
 
       var DataService = /*#__PURE__*/function () {
         function DataService(http, apollo) {
@@ -897,6 +898,16 @@
           value: function getCustomers() {
             return this.apollo.watchQuery({
               query: CustomersQuery
+            });
+          }
+        }, {
+          key: "getCustomersFilter",
+          value: function getCustomersFilter(verified) {
+            return this.apollo.watchQuery({
+              query: CustomersFilterQuery,
+              variables: {
+                is_verified: verified
+              }
             });
           }
         }, {
@@ -1678,7 +1689,7 @@
           loadChildren: function loadChildren() {
             return Promise.all(
             /*! import() | views-base-base-module */
-            [__webpack_require__.e("default~views-base-base-module~views-theme-theme-module"), __webpack_require__.e("default~views-base-base-module~views-notifications-notifications-module"), __webpack_require__.e("views-base-base-module")]).then(__webpack_require__.bind(null,
+            [__webpack_require__.e("default~views-base-base-module~views-buttons-buttons-module~views-notifications-notifications-module"), __webpack_require__.e("default~views-base-base-module~views-theme-theme-module"), __webpack_require__.e("common"), __webpack_require__.e("views-base-base-module")]).then(__webpack_require__.bind(null,
             /*! ./views/base/base.module */
             "Cvcy")).then(function (m) {
               return m.BaseModule;
@@ -1696,11 +1707,11 @@
             });
           }
         }, {
-          path: 'profile',
+          path: 'kpcaller',
           loadChildren: function loadChildren() {
-            return __webpack_require__.e(
+            return Promise.all(
             /*! import() | views-buttons-buttons-module */
-            "views-buttons-buttons-module").then(__webpack_require__.bind(null,
+            [__webpack_require__.e("default~views-base-base-module~views-buttons-buttons-module~views-notifications-notifications-module"), __webpack_require__.e("common"), __webpack_require__.e("views-buttons-buttons-module")]).then(__webpack_require__.bind(null,
             /*! ./views/buttons/buttons.module */
             "Reju")).then(function (m) {
               return m.ButtonsModule;
@@ -1744,7 +1755,7 @@
           loadChildren: function loadChildren() {
             return Promise.all(
             /*! import() | views-notifications-notifications-module */
-            [__webpack_require__.e("default~views-base-base-module~views-notifications-notifications-module"), __webpack_require__.e("views-notifications-notifications-module")]).then(__webpack_require__.bind(null,
+            [__webpack_require__.e("default~views-base-base-module~views-buttons-buttons-module~views-notifications-notifications-module"), __webpack_require__.e("views-notifications-notifications-module")]).then(__webpack_require__.bind(null,
             /*! ./views/notifications/notifications.module */
             "KpDv")).then(function (m) {
               return m.NotificationsModule;
@@ -1808,11 +1819,7 @@
           variant: 'info',
           text: 'NEW'
         }
-      }, // {
-      //   title: true,
-      //   name: 'Theme'
-      // },
-      {
+      }, {
         name: 'Agents',
         url: '/order/order_processing',
         icon: 'icon-note'
@@ -1820,6 +1827,18 @@
         name: 'Customers',
         url: '/order/ready_for_delivery',
         icon: 'icon-basket-loaded'
+      }, {
+        name: 'Verification',
+        url: '/kpcaller/verification',
+        icon: 'icon-cursor'
+      }, {
+        name: 'Assigned',
+        url: '/kpcaller/assigned',
+        icon: 'icon-cursor'
+      }, {
+        name: 'DNF',
+        url: '/kpcaller/dnf',
+        icon: 'icon-cursor'
       }];
       /***/
     },
@@ -1996,13 +2015,13 @@
             if (currentUser) {
               console.log(currentUser, 'authguard', route.data.roles); // check if route is restricted by role
 
-              if (route.data.roles && route.data.roles.indexOf(currentUser.user.employee_type.name) === -1) {
+              if (route.data.roles && route.data.roles.indexOf(currentUser.user.UserType) === -1) {
                 // role not authorised so redirect to home page
                 this.router.navigate(['/']);
+                console.log('authguard failed');
                 return false;
-              }
+              } // authorised so return true
 
-              console.log('authguard failed'); // authorised so return true
 
               return true;
             }
