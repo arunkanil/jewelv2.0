@@ -524,17 +524,18 @@ const GroupsQuery = apollo_angular__WEBPACK_IMPORTED_MODULE_4__["gql"] `
   }
 `;
 const localitiesQuery = apollo_angular__WEBPACK_IMPORTED_MODULE_4__["gql"] `
-query{
-  localities{
-    id
-    Name
-    post_office {
-      Name
+  query {
+    localities {
       id
-      Pincode
+      Name
+      post_office {
+        Name
+        id
+        Pincode
+      }
     }
   }
-}`;
+`;
 const UpdateAgentMutation = apollo_angular__WEBPACK_IMPORTED_MODULE_4__["gql"] `
   mutation (
     $id: ID!
@@ -632,6 +633,7 @@ const CustomersQuery = apollo_angular__WEBPACK_IMPORTED_MODULE_4__["gql"] `
   query {
     customers {
       id
+      is_verified
       NameOfBride
       NameOfFather
       NameOfMother
@@ -666,9 +668,58 @@ const CustomersQuery = apollo_angular__WEBPACK_IMPORTED_MODULE_4__["gql"] `
   }
 `;
 const CustomersFilterQuery = apollo_angular__WEBPACK_IMPORTED_MODULE_4__["gql"] `
-  query($is_verified:Boolean) {
-    customers(where: { is_verified: $is_verified }) {
+  query ($is_verified: Boolean, $kp_caller_assigned_null: Boolean, $kp_id:ID) {
+    customers(
+      where: {
+        is_verified: $is_verified
+        kp_caller_assigned_null: $kp_caller_assigned_null
+        kp_caller_assigned : $kp_id
+      }
+    ) {
       id
+      is_verified
+      NameOfBride
+      NameOfFather
+      NameOfMother
+      MarriageDate
+      MarriageMonth
+      kp_caller_assigned {
+        email
+        username
+      }
+      tele_caller_contact {
+        Name
+        id
+      }
+      created_at
+      Address {
+        id
+        HouseName
+        Landmark
+        locality {
+          Name
+        }
+        post_office {
+          Name
+          Pincode
+          district {
+            Name
+          }
+        }
+        GeoLocation {
+          Latitude
+          Longitude
+          GoogleMapURL
+        }
+      }
+    }
+  }
+`;
+const CustomerSingleQuery = apollo_angular__WEBPACK_IMPORTED_MODULE_4__["gql"] `
+  query ($id: ID!) {
+    customer(id: $id) {
+      id
+      is_verified
       NameOfBride
       NameOfFather
       NameOfMother
@@ -699,55 +750,18 @@ const CustomersFilterQuery = apollo_angular__WEBPACK_IMPORTED_MODULE_4__["gql"] 
           GoogleMapURL
         }
       }
-    }
-  }
-`;
-const CustomerSingleQuery = apollo_angular__WEBPACK_IMPORTED_MODULE_4__["gql"] `
-query($id: ID!) {
-  customer(id: $id) {
-    id
-    NameOfBride
-    NameOfFather
-    NameOfMother
-    MarriageDate
-    MarriageMonth
-    tele_caller_contact{
-      Name
-      id
-    }
-    created_at
-    Address {
-      id
-      HouseName
-      Landmark
-      locality {
-        Name
-      }
-      post_office {
-        Name
-        Pincode
-        district {
-          Name
-        }
-      }
-      GeoLocation {
-        Latitude
-        Longitude
-        GoogleMapURL
-      }
-    }
-    TelecallerRemarks{
-      RemarksText
-      CallHistory{
-        event_date_time
-        users_permissions_user {
-          username
-          email
+      TelecallerRemarks {
+        RemarksText
+        CallHistory {
+          event_date_time
+          users_permissions_user {
+            username
+            email
+          }
         }
       }
     }
   }
-}
 `;
 const AddCustomerMutation = apollo_angular__WEBPACK_IMPORTED_MODULE_4__["gql"] `
   mutation (
@@ -815,53 +829,90 @@ const AddCustomerMutation = apollo_angular__WEBPACK_IMPORTED_MODULE_4__["gql"] `
   }
 `;
 const AddCustomerCommentMutation = apollo_angular__WEBPACK_IMPORTED_MODULE_4__["gql"] `
-mutation($id: ID!, $remarks: String!, $date: DateTime!) {
-  updateCustomer(
-    input: {
-      where: { id: $id }
-      data: {
-        TelecallerRemarks: {
-          RemarksText: $remarks
-          CallHistory: { event_date_time: $date }
-        }
-      }
-    }
+  mutation (
+    $id: ID!
+    $remarks: String!
+    $date: DateTime!
+    $is_verified: Boolean
   ) {
-    customer {
-      id
-      NameOfBride
-      NameOfFather
-      NameOfMother
-      MarriageDate
-      MarriageMonth
-      tele_caller_contact {
-        Name
-        id
-      }
-      created_at
-      Address {
-        id
-        HouseName
-        Landmark
-        locality {
-          Name
+    updateCustomer(
+      input: {
+        where: { id: $id }
+        data: {
+          TelecallerRemarks: {
+            RemarksText: $remarks
+            CallHistory: { event_date_time: $date }
+          }
+          is_verified: $is_verified
         }
-        post_office {
+      }
+    ) {
+      customer {
+        id
+        is_verified
+        NameOfBride
+        NameOfFather
+        NameOfMother
+        MarriageDate
+        MarriageMonth
+        tele_caller_contact {
           Name
-          Pincode
-          district {
+          id
+        }
+        created_at
+        Address {
+          id
+          HouseName
+          Landmark
+          locality {
             Name
           }
-        }
-        GeoLocation {
-          Latitude
-          Longitude
-          GoogleMapURL
+          post_office {
+            Name
+            Pincode
+            district {
+              Name
+            }
+          }
+          GeoLocation {
+            Latitude
+            Longitude
+            GoogleMapURL
+          }
         }
       }
     }
   }
-}`;
+`;
+const SetKpCallerMutation = apollo_angular__WEBPACK_IMPORTED_MODULE_4__["gql"] `
+  mutation ($id: ID!, $cust_id: [ID!]!) {
+    updateUser(input: { where: { id: $id }, data: { kp_customer: $cust_id } }) {
+      user {
+        id
+        kp_customer {
+          id
+          NameOfBride
+          NameOfFather
+        }
+      }
+    }
+  }
+`;
+const UsersQuery = apollo_angular__WEBPACK_IMPORTED_MODULE_4__["gql"] `
+  query ($type: String!) {
+    users(where: { UserType: $type }) {
+      id
+      username
+      email
+      role {
+        id
+        name
+        type
+      }
+      UserType
+    }
+  }
+`;
 let DataService = class DataService {
     constructor(http, apollo) {
         this.http = http;
@@ -962,12 +1013,16 @@ let DataService = class DataService {
             query: CustomersQuery,
         });
     }
+    getUsers(type) {
+        return this.apollo.watchQuery({
+            query: UsersQuery,
+            variables: { type: type },
+        });
+    }
     getCustomersFilter(verified) {
         return this.apollo.watchQuery({
             query: CustomersFilterQuery,
-            variables: {
-                is_verified: verified,
-            },
+            variables: verified,
         });
     }
     getSingleCustomer(id) {
@@ -1002,6 +1057,17 @@ let DataService = class DataService {
                 id: id,
                 remarks: agent.RemarksText,
                 date: agent.event_date_time + ":00.000Z",
+                is_verified: agent.is_verified,
+            },
+            errorPolicy: "all",
+        });
+    }
+    SetKpCaller(id, cust_id) {
+        return this.apollo.mutate({
+            mutation: SetKpCallerMutation,
+            variables: {
+                id: id,
+                cust_id: cust_id,
             },
             errorPolicy: "all",
         });
@@ -1578,15 +1644,15 @@ const routes = [
         children: [
             {
                 path: 'order',
-                loadChildren: () => Promise.all(/*! import() | views-base-base-module */[__webpack_require__.e("default~views-base-base-module~views-buttons-buttons-module~views-notifications-notifications-module"), __webpack_require__.e("default~views-base-base-module~views-theme-theme-module"), __webpack_require__.e("common"), __webpack_require__.e("views-base-base-module")]).then(__webpack_require__.bind(null, /*! ./views/base/base.module */ "Cvcy")).then(m => m.BaseModule)
+                loadChildren: () => Promise.all(/*! import() | views-base-base-module */[__webpack_require__.e("default~views-base-base-module~views-buttons-buttons-module~views-notifications-notifications-module~f2976f04"), __webpack_require__.e("common"), __webpack_require__.e("views-base-base-module")]).then(__webpack_require__.bind(null, /*! ./views/base/base.module */ "Cvcy")).then(m => m.BaseModule)
             },
             {
-                path: 'contact',
-                loadChildren: () => Promise.all(/*! import() | views-theme-theme-module */[__webpack_require__.e("default~views-dashboard-dashboard-module~views-theme-theme-module~views-widgets-widgets-module"), __webpack_require__.e("default~views-base-base-module~views-theme-theme-module"), __webpack_require__.e("views-theme-theme-module")]).then(__webpack_require__.bind(null, /*! ./views/theme/theme.module */ "AgMk")).then(m => m.ThemeModule)
+                path: 'manager',
+                loadChildren: () => Promise.all(/*! import() | views-theme-theme-module */[__webpack_require__.e("default~views-base-base-module~views-buttons-buttons-module~views-notifications-notifications-module~f2976f04"), __webpack_require__.e("common"), __webpack_require__.e("views-theme-theme-module")]).then(__webpack_require__.bind(null, /*! ./views/theme/theme.module */ "AgMk")).then(m => m.ThemeModule)
             },
             {
                 path: 'kpcaller',
-                loadChildren: () => Promise.all(/*! import() | views-buttons-buttons-module */[__webpack_require__.e("default~views-base-base-module~views-buttons-buttons-module~views-notifications-notifications-module"), __webpack_require__.e("common"), __webpack_require__.e("views-buttons-buttons-module")]).then(__webpack_require__.bind(null, /*! ./views/buttons/buttons.module */ "Reju")).then(m => m.ButtonsModule)
+                loadChildren: () => Promise.all(/*! import() | views-buttons-buttons-module */[__webpack_require__.e("default~views-base-base-module~views-buttons-buttons-module~views-notifications-notifications-module~f2976f04"), __webpack_require__.e("common"), __webpack_require__.e("views-buttons-buttons-module")]).then(__webpack_require__.bind(null, /*! ./views/buttons/buttons.module */ "Reju")).then(m => m.ButtonsModule)
             },
             {
                 path: 'charts',
@@ -1594,7 +1660,7 @@ const routes = [
             },
             {
                 path: 'dashboard',
-                loadChildren: () => Promise.all(/*! import() | views-dashboard-dashboard-module */[__webpack_require__.e("default~views-dashboard-dashboard-module~views-theme-theme-module~views-widgets-widgets-module"), __webpack_require__.e("common"), __webpack_require__.e("views-dashboard-dashboard-module")]).then(__webpack_require__.bind(null, /*! ./views/dashboard/dashboard.module */ "6dU7")).then(m => m.DashboardModule)
+                loadChildren: () => Promise.all(/*! import() | views-dashboard-dashboard-module */[__webpack_require__.e("default~views-dashboard-dashboard-module~views-widgets-widgets-module"), __webpack_require__.e("views-dashboard-dashboard-module")]).then(__webpack_require__.bind(null, /*! ./views/dashboard/dashboard.module */ "6dU7")).then(m => m.DashboardModule)
             },
             {
                 path: 'icons',
@@ -1602,11 +1668,11 @@ const routes = [
             },
             {
                 path: 'notifications',
-                loadChildren: () => Promise.all(/*! import() | views-notifications-notifications-module */[__webpack_require__.e("default~views-base-base-module~views-buttons-buttons-module~views-notifications-notifications-module"), __webpack_require__.e("views-notifications-notifications-module")]).then(__webpack_require__.bind(null, /*! ./views/notifications/notifications.module */ "KpDv")).then(m => m.NotificationsModule)
+                loadChildren: () => Promise.all(/*! import() | views-notifications-notifications-module */[__webpack_require__.e("default~views-base-base-module~views-buttons-buttons-module~views-notifications-notifications-module~f2976f04"), __webpack_require__.e("views-notifications-notifications-module")]).then(__webpack_require__.bind(null, /*! ./views/notifications/notifications.module */ "KpDv")).then(m => m.NotificationsModule)
             },
             {
                 path: 'widgets',
-                loadChildren: () => Promise.all(/*! import() | views-widgets-widgets-module */[__webpack_require__.e("default~views-dashboard-dashboard-module~views-theme-theme-module~views-widgets-widgets-module"), __webpack_require__.e("common"), __webpack_require__.e("views-widgets-widgets-module")]).then(__webpack_require__.bind(null, /*! ./views/widgets/widgets.module */ "XVX6")).then(m => m.WidgetsModule)
+                loadChildren: () => Promise.all(/*! import() | views-widgets-widgets-module */[__webpack_require__.e("default~views-dashboard-dashboard-module~views-widgets-widgets-module"), __webpack_require__.e("views-widgets-widgets-module")]).then(__webpack_require__.bind(null, /*! ./views/widgets/widgets.module */ "XVX6")).then(m => m.WidgetsModule)
             }
         ]
     },
@@ -1669,6 +1735,16 @@ const navItems = [
         name: 'DNF',
         url: '/kpcaller/dnf',
         icon: 'icon-cursor'
+    },
+    // {
+    //   name: 'All Orders',
+    //   url: '/order/all_orders',
+    //   icon: 'icon-notebook'
+    // },
+    {
+        name: 'Verified List',
+        url: '/manager/verified_list',
+        icon: 'icon-phone'
     },
 ];
 

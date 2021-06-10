@@ -1,5 +1,5 @@
 (function () {
-  var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13;
+  var _templateObject, _templateObject2, _templateObject3, _templateObject4, _templateObject5, _templateObject6, _templateObject7, _templateObject8, _templateObject9, _templateObject10, _templateObject11, _templateObject12, _templateObject13, _templateObject14, _templateObject15;
 
   function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(0); } return Object.freeze(Object.defineProperties(strings, { raw: { value: Object.freeze(raw) } })); }
 
@@ -765,15 +765,17 @@
       var AgentsSingleQuery = apollo_angular__WEBPACK_IMPORTED_MODULE_4__["gql"](_templateObject2 || (_templateObject2 = _taggedTemplateLiteral(["\n  query ($id: ID!) {\n    teleCallerContact(id: $id) {\n      id\n      Name\n      Email\n      group {\n        Name\n        Description\n      }\n      Contact_Number_1\n      Contact_Number_2\n      Contact_Number_3\n      telecaller_remarks {\n        RemarksText\n        CallHistory {\n          event_date_time\n          users_permissions_user {\n            username\n          }\n        }\n      }\n    }\n  }\n"])));
       var AddAgentMutation = apollo_angular__WEBPACK_IMPORTED_MODULE_4__["gql"](_templateObject3 || (_templateObject3 = _taggedTemplateLiteral(["\n  mutation (\n    $name: String!\n    $group: ID!\n    $email: String!\n    $phone1: Long!\n    $phone2: Long!\n    $phone3: Long!\n  ) {\n    createTeleCallerContact(\n      input: {\n        data: {\n          Name: $name\n          Email: $email\n          Contact_Number_1: $phone1\n          Contact_Number_2: $phone2\n          Contact_Number_3: $phone3\n          group: $group\n        }\n      }\n    ) {\n      teleCallerContact {\n        id\n        Name\n        Contact_Number_1\n        Contact_Number_2\n        Contact_Number_3\n        group {\n          Name\n          Description\n        }\n        Email\n      }\n    }\n  }\n"])));
       var GroupsQuery = apollo_angular__WEBPACK_IMPORTED_MODULE_4__["gql"](_templateObject4 || (_templateObject4 = _taggedTemplateLiteral(["\n  query GroupsQuery {\n    groups {\n      id\n      Name\n      Description\n    }\n  }\n"])));
-      var localitiesQuery = apollo_angular__WEBPACK_IMPORTED_MODULE_4__["gql"](_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\nquery{\n  localities{\n    id\n    Name\n    post_office {\n      Name\n      id\n      Pincode\n    }\n  }\n}"])));
+      var localitiesQuery = apollo_angular__WEBPACK_IMPORTED_MODULE_4__["gql"](_templateObject5 || (_templateObject5 = _taggedTemplateLiteral(["\n  query {\n    localities {\n      id\n      Name\n      post_office {\n        Name\n        id\n        Pincode\n      }\n    }\n  }\n"])));
       var UpdateAgentMutation = apollo_angular__WEBPACK_IMPORTED_MODULE_4__["gql"](_templateObject6 || (_templateObject6 = _taggedTemplateLiteral(["\n  mutation (\n    $id: ID!\n    $name: String!\n    $group: ID!\n    $email: String!\n    $phone1: Long!\n    $phone2: Long!\n    $phone3: Long!\n  ) {\n    updateTeleCallerContact(\n      input: {\n        where: { id: $id }\n        data: {\n          Name: $name\n          Email: $email\n          Contact_Number_1: $phone1\n          Contact_Number_2: $phone2\n          Contact_Number_3: $phone3\n          group: $group\n        }\n      }\n    ) {\n      teleCallerContact {\n        id\n        Name\n        Contact_Number_1\n        Contact_Number_2\n        Contact_Number_3\n        group {\n          Name\n          Description\n        }\n        Email\n      }\n    }\n  }\n"])));
       var DeleteAgentMutation = apollo_angular__WEBPACK_IMPORTED_MODULE_4__["gql"](_templateObject7 || (_templateObject7 = _taggedTemplateLiteral(["\n  mutation ($id: ID!) {\n    deleteTeleCallerContact(input: { where: { id: $id } }) {\n      teleCallerContact {\n        id\n        Name\n        Contact_Number_1\n        Contact_Number_2\n        Contact_Number_3\n        group {\n          Name\n          Description\n        }\n        Email\n      }\n    }\n  }\n"])));
       var AddCommentMutation = apollo_angular__WEBPACK_IMPORTED_MODULE_4__["gql"](_templateObject8 || (_templateObject8 = _taggedTemplateLiteral(["\n  mutation ($id: ID!, $remarks: String!, $date: DateTime!) {\n    updateTeleCallerContact(\n      input: {\n        where: { id: $id }\n        data: {\n          telecaller_remarks: {\n            RemarksText: $remarks\n            CallHistory: { event_date_time: $date }\n          }\n        }\n      }\n    ) {\n      teleCallerContact {\n        id\n        Name\n        Email\n        group {\n          Name\n          Description\n        }\n        Contact_Number_1\n        Contact_Number_2\n        Contact_Number_3\n        telecaller_remarks {\n          RemarksText\n          CallHistory {\n            event_date_time\n            users_permissions_user {\n              username\n            }\n          }\n        }\n      }\n    }\n  }\n"])));
-      var CustomersQuery = apollo_angular__WEBPACK_IMPORTED_MODULE_4__["gql"](_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  query {\n    customers {\n      id\n      NameOfBride\n      NameOfFather\n      NameOfMother\n      MarriageDate\n      MarriageMonth\n      tele_caller_contact {\n        Name\n        id\n      }\n      created_at\n      Address {\n        id\n        HouseName\n        Landmark\n        locality {\n          Name\n        }\n        post_office {\n          Name\n          Pincode\n          district {\n            Name\n          }\n        }\n        GeoLocation {\n          Latitude\n          Longitude\n          GoogleMapURL\n        }\n      }\n    }\n  }\n"])));
-      var CustomersFilterQuery = apollo_angular__WEBPACK_IMPORTED_MODULE_4__["gql"](_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  query($is_verified:Boolean) {\n    customers(where: { is_verified: $is_verified }) {\n      id\n      NameOfBride\n      NameOfFather\n      NameOfMother\n      MarriageDate\n      MarriageMonth\n      tele_caller_contact {\n        Name\n        id\n      }\n      created_at\n      Address {\n        id\n        HouseName\n        Landmark\n        locality {\n          Name\n        }\n        post_office {\n          Name\n          Pincode\n          district {\n            Name\n          }\n        }\n        GeoLocation {\n          Latitude\n          Longitude\n          GoogleMapURL\n        }\n      }\n    }\n  }\n"])));
-      var CustomerSingleQuery = apollo_angular__WEBPACK_IMPORTED_MODULE_4__["gql"](_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\nquery($id: ID!) {\n  customer(id: $id) {\n    id\n    NameOfBride\n    NameOfFather\n    NameOfMother\n    MarriageDate\n    MarriageMonth\n    tele_caller_contact{\n      Name\n      id\n    }\n    created_at\n    Address {\n      id\n      HouseName\n      Landmark\n      locality {\n        Name\n      }\n      post_office {\n        Name\n        Pincode\n        district {\n          Name\n        }\n      }\n      GeoLocation {\n        Latitude\n        Longitude\n        GoogleMapURL\n      }\n    }\n    TelecallerRemarks{\n      RemarksText\n      CallHistory{\n        event_date_time\n        users_permissions_user {\n          username\n          email\n        }\n      }\n    }\n  }\n}\n"])));
+      var CustomersQuery = apollo_angular__WEBPACK_IMPORTED_MODULE_4__["gql"](_templateObject9 || (_templateObject9 = _taggedTemplateLiteral(["\n  query {\n    customers {\n      id\n      is_verified\n      NameOfBride\n      NameOfFather\n      NameOfMother\n      MarriageDate\n      MarriageMonth\n      tele_caller_contact {\n        Name\n        id\n      }\n      created_at\n      Address {\n        id\n        HouseName\n        Landmark\n        locality {\n          Name\n        }\n        post_office {\n          Name\n          Pincode\n          district {\n            Name\n          }\n        }\n        GeoLocation {\n          Latitude\n          Longitude\n          GoogleMapURL\n        }\n      }\n    }\n  }\n"])));
+      var CustomersFilterQuery = apollo_angular__WEBPACK_IMPORTED_MODULE_4__["gql"](_templateObject10 || (_templateObject10 = _taggedTemplateLiteral(["\n  query ($is_verified: Boolean, $kp_caller_assigned_null: Boolean, $kp_id:ID) {\n    customers(\n      where: {\n        is_verified: $is_verified\n        kp_caller_assigned_null: $kp_caller_assigned_null\n        kp_caller_assigned : $kp_id\n      }\n    ) {\n      id\n      is_verified\n      NameOfBride\n      NameOfFather\n      NameOfMother\n      MarriageDate\n      MarriageMonth\n      kp_caller_assigned {\n        email\n        username\n      }\n      tele_caller_contact {\n        Name\n        id\n      }\n      created_at\n      Address {\n        id\n        HouseName\n        Landmark\n        locality {\n          Name\n        }\n        post_office {\n          Name\n          Pincode\n          district {\n            Name\n          }\n        }\n        GeoLocation {\n          Latitude\n          Longitude\n          GoogleMapURL\n        }\n      }\n    }\n  }\n"])));
+      var CustomerSingleQuery = apollo_angular__WEBPACK_IMPORTED_MODULE_4__["gql"](_templateObject11 || (_templateObject11 = _taggedTemplateLiteral(["\n  query ($id: ID!) {\n    customer(id: $id) {\n      id\n      is_verified\n      NameOfBride\n      NameOfFather\n      NameOfMother\n      MarriageDate\n      MarriageMonth\n      tele_caller_contact {\n        Name\n        id\n      }\n      created_at\n      Address {\n        id\n        HouseName\n        Landmark\n        locality {\n          Name\n        }\n        post_office {\n          Name\n          Pincode\n          district {\n            Name\n          }\n        }\n        GeoLocation {\n          Latitude\n          Longitude\n          GoogleMapURL\n        }\n      }\n      TelecallerRemarks {\n        RemarksText\n        CallHistory {\n          event_date_time\n          users_permissions_user {\n            username\n            email\n          }\n        }\n      }\n    }\n  }\n"])));
       var AddCustomerMutation = apollo_angular__WEBPACK_IMPORTED_MODULE_4__["gql"](_templateObject12 || (_templateObject12 = _taggedTemplateLiteral(["\n  mutation (\n    $NameOfBride: String!\n    $NameOfFather: String!\n    $NameOfMother: String!\n    $MarriageDate: Date!\n    $MarriageMonth: Int!\n    $tele_caller_contact: ID!\n    $HouseName: String!\n    $Landmark: String!\n    $locality: ID!\n  ) {\n    createCustomer(\n      input: {\n        data: {\n          NameOfBride: $NameOfBride\n          NameOfFather: $NameOfFather\n          NameOfMother: $NameOfMother\n          MarriageDate: $MarriageDate\n          MarriageMonth: $MarriageMonth\n          tele_caller_contact: $tele_caller_contact\n          Address: {\n            HouseName: $HouseName\n            Landmark: $Landmark\n            locality: $locality\n          }\n        }\n      }\n    ) {\n      customer {\n        id\n        NameOfBride\n        NameOfFather\n        NameOfMother\n        MarriageDate\n        MarriageMonth\n        tele_caller_contact {\n          Name\n          id\n        }\n        created_at\n        Address {\n          id\n          HouseName\n          Landmark\n          locality {\n            Name\n          }\n          post_office {\n            Name\n            Pincode\n            district {\n              Name\n            }\n          }\n          GeoLocation {\n            Latitude\n            Longitude\n            GoogleMapURL\n          }\n        }\n      }\n    }\n  }\n"])));
-      var AddCustomerCommentMutation = apollo_angular__WEBPACK_IMPORTED_MODULE_4__["gql"](_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\nmutation($id: ID!, $remarks: String!, $date: DateTime!) {\n  updateCustomer(\n    input: {\n      where: { id: $id }\n      data: {\n        TelecallerRemarks: {\n          RemarksText: $remarks\n          CallHistory: { event_date_time: $date }\n        }\n      }\n    }\n  ) {\n    customer {\n      id\n      NameOfBride\n      NameOfFather\n      NameOfMother\n      MarriageDate\n      MarriageMonth\n      tele_caller_contact {\n        Name\n        id\n      }\n      created_at\n      Address {\n        id\n        HouseName\n        Landmark\n        locality {\n          Name\n        }\n        post_office {\n          Name\n          Pincode\n          district {\n            Name\n          }\n        }\n        GeoLocation {\n          Latitude\n          Longitude\n          GoogleMapURL\n        }\n      }\n    }\n  }\n}"])));
+      var AddCustomerCommentMutation = apollo_angular__WEBPACK_IMPORTED_MODULE_4__["gql"](_templateObject13 || (_templateObject13 = _taggedTemplateLiteral(["\n  mutation (\n    $id: ID!\n    $remarks: String!\n    $date: DateTime!\n    $is_verified: Boolean\n  ) {\n    updateCustomer(\n      input: {\n        where: { id: $id }\n        data: {\n          TelecallerRemarks: {\n            RemarksText: $remarks\n            CallHistory: { event_date_time: $date }\n          }\n          is_verified: $is_verified\n        }\n      }\n    ) {\n      customer {\n        id\n        is_verified\n        NameOfBride\n        NameOfFather\n        NameOfMother\n        MarriageDate\n        MarriageMonth\n        tele_caller_contact {\n          Name\n          id\n        }\n        created_at\n        Address {\n          id\n          HouseName\n          Landmark\n          locality {\n            Name\n          }\n          post_office {\n            Name\n            Pincode\n            district {\n              Name\n            }\n          }\n          GeoLocation {\n            Latitude\n            Longitude\n            GoogleMapURL\n          }\n        }\n      }\n    }\n  }\n"])));
+      var SetKpCallerMutation = apollo_angular__WEBPACK_IMPORTED_MODULE_4__["gql"](_templateObject14 || (_templateObject14 = _taggedTemplateLiteral(["\n  mutation ($id: ID!, $cust_id: [ID!]!) {\n    updateUser(input: { where: { id: $id }, data: { kp_customer: $cust_id } }) {\n      user {\n        id\n        kp_customer {\n          id\n          NameOfBride\n          NameOfFather\n        }\n      }\n    }\n  }\n"])));
+      var UsersQuery = apollo_angular__WEBPACK_IMPORTED_MODULE_4__["gql"](_templateObject15 || (_templateObject15 = _taggedTemplateLiteral(["\n  query ($type: String!) {\n    users(where: { UserType: $type }) {\n      id\n      username\n      email\n      role {\n        id\n        name\n        type\n      }\n      UserType\n    }\n  }\n"])));
 
       var DataService = /*#__PURE__*/function () {
         function DataService(http, apollo) {
@@ -901,13 +903,21 @@
             });
           }
         }, {
+          key: "getUsers",
+          value: function getUsers(type) {
+            return this.apollo.watchQuery({
+              query: UsersQuery,
+              variables: {
+                type: type
+              }
+            });
+          }
+        }, {
           key: "getCustomersFilter",
           value: function getCustomersFilter(verified) {
             return this.apollo.watchQuery({
               query: CustomersFilterQuery,
-              variables: {
-                is_verified: verified
-              }
+              variables: verified
             });
           }
         }, {
@@ -947,7 +957,20 @@
               variables: {
                 id: id,
                 remarks: agent.RemarksText,
-                date: agent.event_date_time + ":00.000Z"
+                date: agent.event_date_time + ":00.000Z",
+                is_verified: agent.is_verified
+              },
+              errorPolicy: "all"
+            });
+          }
+        }, {
+          key: "SetKpCaller",
+          value: function SetKpCaller(id, cust_id) {
+            return this.apollo.mutate({
+              mutation: SetKpCallerMutation,
+              variables: {
+                id: id,
+                cust_id: cust_id
               },
               errorPolicy: "all"
             });
@@ -1689,18 +1712,18 @@
           loadChildren: function loadChildren() {
             return Promise.all(
             /*! import() | views-base-base-module */
-            [__webpack_require__.e("default~views-base-base-module~views-buttons-buttons-module~views-notifications-notifications-module"), __webpack_require__.e("default~views-base-base-module~views-theme-theme-module"), __webpack_require__.e("common"), __webpack_require__.e("views-base-base-module")]).then(__webpack_require__.bind(null,
+            [__webpack_require__.e("default~views-base-base-module~views-buttons-buttons-module~views-notifications-notifications-module~f2976f04"), __webpack_require__.e("common"), __webpack_require__.e("views-base-base-module")]).then(__webpack_require__.bind(null,
             /*! ./views/base/base.module */
             "Cvcy")).then(function (m) {
               return m.BaseModule;
             });
           }
         }, {
-          path: 'contact',
+          path: 'manager',
           loadChildren: function loadChildren() {
             return Promise.all(
             /*! import() | views-theme-theme-module */
-            [__webpack_require__.e("default~views-dashboard-dashboard-module~views-theme-theme-module~views-widgets-widgets-module"), __webpack_require__.e("default~views-base-base-module~views-theme-theme-module"), __webpack_require__.e("views-theme-theme-module")]).then(__webpack_require__.bind(null,
+            [__webpack_require__.e("default~views-base-base-module~views-buttons-buttons-module~views-notifications-notifications-module~f2976f04"), __webpack_require__.e("common"), __webpack_require__.e("views-theme-theme-module")]).then(__webpack_require__.bind(null,
             /*! ./views/theme/theme.module */
             "AgMk")).then(function (m) {
               return m.ThemeModule;
@@ -1711,7 +1734,7 @@
           loadChildren: function loadChildren() {
             return Promise.all(
             /*! import() | views-buttons-buttons-module */
-            [__webpack_require__.e("default~views-base-base-module~views-buttons-buttons-module~views-notifications-notifications-module"), __webpack_require__.e("common"), __webpack_require__.e("views-buttons-buttons-module")]).then(__webpack_require__.bind(null,
+            [__webpack_require__.e("default~views-base-base-module~views-buttons-buttons-module~views-notifications-notifications-module~f2976f04"), __webpack_require__.e("common"), __webpack_require__.e("views-buttons-buttons-module")]).then(__webpack_require__.bind(null,
             /*! ./views/buttons/buttons.module */
             "Reju")).then(function (m) {
               return m.ButtonsModule;
@@ -1733,7 +1756,7 @@
           loadChildren: function loadChildren() {
             return Promise.all(
             /*! import() | views-dashboard-dashboard-module */
-            [__webpack_require__.e("default~views-dashboard-dashboard-module~views-theme-theme-module~views-widgets-widgets-module"), __webpack_require__.e("common"), __webpack_require__.e("views-dashboard-dashboard-module")]).then(__webpack_require__.bind(null,
+            [__webpack_require__.e("default~views-dashboard-dashboard-module~views-widgets-widgets-module"), __webpack_require__.e("views-dashboard-dashboard-module")]).then(__webpack_require__.bind(null,
             /*! ./views/dashboard/dashboard.module */
             "6dU7")).then(function (m) {
               return m.DashboardModule;
@@ -1755,7 +1778,7 @@
           loadChildren: function loadChildren() {
             return Promise.all(
             /*! import() | views-notifications-notifications-module */
-            [__webpack_require__.e("default~views-base-base-module~views-buttons-buttons-module~views-notifications-notifications-module"), __webpack_require__.e("views-notifications-notifications-module")]).then(__webpack_require__.bind(null,
+            [__webpack_require__.e("default~views-base-base-module~views-buttons-buttons-module~views-notifications-notifications-module~f2976f04"), __webpack_require__.e("views-notifications-notifications-module")]).then(__webpack_require__.bind(null,
             /*! ./views/notifications/notifications.module */
             "KpDv")).then(function (m) {
               return m.NotificationsModule;
@@ -1766,7 +1789,7 @@
           loadChildren: function loadChildren() {
             return Promise.all(
             /*! import() | views-widgets-widgets-module */
-            [__webpack_require__.e("default~views-dashboard-dashboard-module~views-theme-theme-module~views-widgets-widgets-module"), __webpack_require__.e("common"), __webpack_require__.e("views-widgets-widgets-module")]).then(__webpack_require__.bind(null,
+            [__webpack_require__.e("default~views-dashboard-dashboard-module~views-widgets-widgets-module"), __webpack_require__.e("views-widgets-widgets-module")]).then(__webpack_require__.bind(null,
             /*! ./views/widgets/widgets.module */
             "XVX6")).then(function (m) {
               return m.WidgetsModule;
@@ -1839,6 +1862,15 @@
         name: 'DNF',
         url: '/kpcaller/dnf',
         icon: 'icon-cursor'
+      }, // {
+      //   name: 'All Orders',
+      //   url: '/order/all_orders',
+      //   icon: 'icon-notebook'
+      // },
+      {
+        name: 'Verified List',
+        url: '/manager/verified_list',
+        icon: 'icon-phone'
       }];
       /***/
     },

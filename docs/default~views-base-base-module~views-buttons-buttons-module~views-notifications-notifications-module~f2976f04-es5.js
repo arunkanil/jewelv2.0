@@ -11,7 +11,7 @@
 
   function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-  (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["default~views-base-base-module~views-buttons-buttons-module~views-notifications-notifications-module"], {
+  (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["default~views-base-base-module~views-buttons-buttons-module~views-notifications-notifications-module~f2976f04"], {
     /***/
     "LqlI":
     /*!**************************************************************************!*\
@@ -1988,4 +1988,4 @@
     }
   }]);
 })();
-//# sourceMappingURL=default~views-base-base-module~views-buttons-buttons-module~views-notifications-notifications-module-es5.js.map
+//# sourceMappingURL=default~views-base-base-module~views-buttons-buttons-module~views-notifications-notifications-module~f2976f04-es5.js.map

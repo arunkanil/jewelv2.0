@@ -199,19 +199,22 @@
         }, {
           key: "CommentSubmit",
           value: function CommentSubmit() {
+            var _this3 = this;
+
             var resp = {};
-            console.log(this.commentForm.value); // this.dataservice
-            //   .AddCustomerComment(this.details.id, this.commentForm.value)
-            //   .subscribe((result: any) => {
-            //     resp = result.data;
-            //     console.log("response", result);
-            //     if (result.data.updateCustomer) {
-            //       alert("Comment added successfully!");
-            //       this.commentModal.hide();
-            //     } else {
-            //       alert("Failed. Please check the fields!");
-            //     }
-            //   });
+            console.log(this.commentForm.value);
+            this.dataservice.AddCustomerComment(this.details.id, this.commentForm.value).subscribe(function (result) {
+              resp = result.data;
+              console.log("response", result);
+
+              if (result.data.updateCustomer) {
+                alert("Comment added successfully!");
+
+                _this3.commentModal.hide();
+              } else {
+                alert("Failed. Please check the fields!");
+              }
+            });
           }
         }]);
 
@@ -537,19 +540,7 @@
       /* harmony import */
 
 
-      var _dropdowns_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
-      /*! ./dropdowns.component */
-      "QF1n");
-      /* harmony import */
-
-
-      var _brand_buttons_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
-      /*! ./brand-buttons.component */
-      "5EjJ");
-      /* harmony import */
-
-
-      var _customerdetail_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+      var _customerdetail_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
       /*! ./customerdetail.component */
       "NBjn");
 
@@ -566,19 +557,19 @@
           }
         }, {
           path: 'assigned',
-          component: _dropdowns_component__WEBPACK_IMPORTED_MODULE_4__["DropdownsComponent"],
+          component: _buttons_component__WEBPACK_IMPORTED_MODULE_3__["ButtonsComponent"],
           data: {
-            title: 'Dropdowns'
+            title: 'Assigned List'
           }
         }, {
           path: 'dnf',
-          component: _brand_buttons_component__WEBPACK_IMPORTED_MODULE_5__["BrandButtonsComponent"],
+          component: _buttons_component__WEBPACK_IMPORTED_MODULE_3__["ButtonsComponent"],
           data: {
-            title: 'Brand buttons'
+            title: 'DNF'
           }
         }, {
           path: 'kp_customer_details/:id',
-          component: _customerdetail_component__WEBPACK_IMPORTED_MODULE_6__["KPCustomerDetailComponent"],
+          component: _customerdetail_component__WEBPACK_IMPORTED_MODULE_4__["KPCustomerDetailComponent"],
           data: {
             title: 'Customer Details'
           }
@@ -632,7 +623,7 @@
       /* harmony default export */
 
 
-      __webpack_exports__["default"] = "<div class=\"animated fadeIn\">\n  <div class=\"card\">\n    <div class=\"card-header\" style=\"display: flex; justify-content: space-between\">\n      <h2>Verification List</h2>\n    </div>\n    <div class=\"card-body\">\n      <div class=\"row\">\n        <div class=\"col-12\">\n          <ag-grid-angular #agGrid style=\"width: 100%; height: 500px\" id=\"myGrid\" class=\"ag-theme-alpine\"\n            [columnDefs]=\"columnDefs\" [rowData]=\"rowData\" [rowSelection]=\"rowSelection\"\n            (gridReady)=\"onGridReady($event)\" (selectionChanged)=\"onSelectionChanged($event)\" animateRows=\"true\">\n          </ag-grid-angular>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>";
+      __webpack_exports__["default"] = "<div class=\"animated fadeIn\">\n  <div class=\"card\">\n    <div class=\"card-header\" style=\"display: flex; justify-content: space-between\">\n      <h2>Assigned List</h2>\n    </div>\n    <div class=\"card-body\">\n      <div class=\"row\">\n        <div class=\"col-12\">\n          <ag-grid-angular #agGrid style=\"width: 100%; height: 500px\" id=\"myGrid\" class=\"ag-theme-alpine\"\n            [columnDefs]=\"columnDefs\" [rowData]=\"rowData\" [rowSelection]=\"rowSelection\"\n            (gridReady)=\"onGridReady($event)\" (selectionChanged)=\"onSelectionChanged($event)\" animateRows=\"true\">\n          </ag-grid-angular>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>";
       /***/
     },
 
@@ -715,12 +706,15 @@
         }, {
           key: "getLists",
           value: function getLists() {
-            var _this3 = this;
+            var _this4 = this;
 
             this.loading = true;
-            this.dataservice.getCustomersFilter(false).valueChanges.subscribe(function (result) {
+            var filter = {
+              kp_id: localStorage.getItem("uid")
+            };
+            this.dataservice.getCustomersFilter(filter).valueChanges.subscribe(function (result) {
               console.log("getCustomersFilter", result.data.customers);
-              _this3.rowData = result.data.customers;
+              _this4.rowData = result.data.customers;
             });
           }
         }, {
