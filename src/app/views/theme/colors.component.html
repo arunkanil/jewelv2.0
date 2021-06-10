@@ -1,27 +1,56 @@
 <div class="animated fadeIn">
   <div class="card">
-    <div class="card-header">
-      <h2>Contact Form</h2>
+    <div class="card-header" style="display: flex; justify-content: space-between">
+      <h2>Verified List</h2>
+      <button type="button" class="btn btn-primary" data-toggle="modal" [disabled]="btnDisabled"
+        (click)="myModal.show()">
+        Assign to caller
+      </button>
     </div>
     <div class="card-body">
-      <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
-        <div class="form-group row">
-          <label class="col-md-3 col-form-label" for="text-input">Contact number</label>
-          <div class="col-md-9">
-            <input type="number" id="text-input" name="text-input" class="form-control" placeholder="Text">
-          </div>
+      <div class="row">
+        <div class="col-12">
+          <ag-grid-angular #agGrid style="width: 100%; height: 500px" id="myGrid" class="ag-theme-alpine"
+            [columnDefs]="columnDefs" [rowData]="rowData" [rowSelection]="rowSelection"
+            (gridReady)="onGridReady($event)" (selectionChanged)="onSelectionChanged($event)" animateRows="true">
+          </ag-grid-angular>
         </div>
-        <div class="form-group row">
-          <label class="col-md-3 col-form-label" for="textarea-input">Message</label>
-          <div class="col-md-9">
-            <textarea id="textarea-input" name="textarea-input" rows="9" class="form-control"
-              placeholder="Content.."></textarea>
-          </div>
-        </div>
-      </form>
+      </div>
     </div>
-    <div class="card-footer">
-      <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-dot-circle-o"></i> Submit</button>
+    <div bsModal #myModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Assign to Caller</h4>
+            <button type="button" class="close" (click)="myModal.hide()" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form [formGroup]="callerForm" (ngSubmit)="FormSubmit()">
+              <div class="form-group">
+                <label for="id">KP Caller</label>
+                <select class="form-control" id="id" required ngModel name="group" formControlName="id">
+                  <option value="" disabled selected hidden>Choose...</option>
+                  <option *ngFor="let item of users" value="{{ item.id }}">
+                    {{ item.username }}
+                  </option>
+                </select>
+              </div>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                Close
+              </button>
+              <button type="submit" class="btn btn-primary ml-2" [disabled]="btnLoading || !callerForm.valid">
+                <span *ngIf="btnLoading" class="spinner-border spinner-border-sm" role="status"
+                  aria-hidden="true"></span>
+                Save changes
+              </button>
+            </form>
+          </div>
+        </div>
+        <!-- /.modal-content -->
+      </div>
     </div>
   </div>
 </div>

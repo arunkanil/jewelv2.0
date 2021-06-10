@@ -40,11 +40,11 @@ export const navItems: INavData[] = [
   //   url: '/order/all_orders',
   //   icon: 'icon-notebook'
   // },
-  // {
-  //   name: 'Contact',
-  //   url: '/contact/contact_form',
-  //   icon: 'icon-phone'
-  // },
+  {
+    name: 'Verified List',
+    url: '/manager/verified_list',
+    icon: 'icon-phone'
+  },
   // {
   //   name: 'Profile',
   //   url: '/profile/view_profile',

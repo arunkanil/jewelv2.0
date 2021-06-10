@@ -1,9 +1,12 @@
 // Angular
 import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
-import {IvyCarouselModule} from 'angular-responsive-carousel';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
+import { AgGridModule } from 'ag-grid-angular';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
-import { ColorsComponent } from './colors.component';
+import { NgModule } from '@angular/core';
+import { VerifiedListComponent } from './colors.component';
+
 // import { TypographyComponent } from './typography.component';
 
 // Theme Routing
@@ -13,10 +16,13 @@ import { ThemeRoutingModule } from './theme-routing.module';
   imports: [
     CommonModule,
     ThemeRoutingModule,
-    IvyCarouselModule
+    ReactiveFormsModule,
+    AgGridModule.withComponents([]),
+    ModalModule.forRoot(),
+    FormsModule
   ],
   declarations: [
-    ColorsComponent,
+    VerifiedListComponent,
     // TypographyComponent
   ]
 })

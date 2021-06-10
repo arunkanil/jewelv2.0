@@ -91,17 +91,18 @@ const GroupsQuery = gql`
   }
 `;
 const localitiesQuery = gql`
-query{
-  localities{
-    id
-    Name
-    post_office {
-      Name
+  query {
+    localities {
       id
-      Pincode
+      Name
+      post_office {
+        Name
+        id
+        Pincode
+      }
     }
   }
-}`;
+`;
 const UpdateAgentMutation = gql`
   mutation (
     $id: ID!
@@ -199,6 +200,7 @@ const CustomersQuery = gql`
   query {
     customers {
       id
+      is_verified
       NameOfBride
       NameOfFather
       NameOfMother
@@ -233,9 +235,58 @@ const CustomersQuery = gql`
   }
 `;
 const CustomersFilterQuery = gql`
-  query($is_verified:Boolean) {
-    customers(where: { is_verified: $is_verified }) {
+  query ($is_verified: Boolean, $kp_caller_assigned_null: Boolean, $kp_id:ID) {
+    customers(
+      where: {
+        is_verified: $is_verified
+        kp_caller_assigned_null: $kp_caller_assigned_null
+        kp_caller_assigned : $kp_id
+      }
+    ) {
       id
+      is_verified
+      NameOfBride
+      NameOfFather
+      NameOfMother
+      MarriageDate
+      MarriageMonth
+      kp_caller_assigned {
+        email
+        username
+      }
+      tele_caller_contact {
+        Name
+        id
+      }
+      created_at
+      Address {
+        id
+        HouseName
+        Landmark
+        locality {
+          Name
+        }
+        post_office {
+          Name
+          Pincode
+          district {
+            Name
+          }
+        }
+        GeoLocation {
+          Latitude
+          Longitude
+          GoogleMapURL
+        }
+      }
+    }
+  }
+`;
+const CustomerSingleQuery = gql`
+  query ($id: ID!) {
+    customer(id: $id) {
+      id
+      is_verified
       NameOfBride
       NameOfFather
       NameOfMother
@@ -266,55 +317,18 @@ const CustomersFilterQuery = gql`
           GoogleMapURL
         }
       }
-    }
-  }
-`;
-const CustomerSingleQuery = gql`
-query($id: ID!) {
-  customer(id: $id) {
-    id
-    NameOfBride
-    NameOfFather
-    NameOfMother
-    MarriageDate
-    MarriageMonth
-    tele_caller_contact{
-      Name
-      id
-    }
-    created_at
-    Address {
-      id
-      HouseName
-      Landmark
-      locality {
-        Name
-      }
-      post_office {
-        Name
-        Pincode
-        district {
-          Name
-        }
-      }
-      GeoLocation {
-        Latitude
-        Longitude
-        GoogleMapURL
-      }
-    }
-    TelecallerRemarks{
-      RemarksText
-      CallHistory{
-        event_date_time
-        users_permissions_user {
-          username
-          email
+      TelecallerRemarks {
+        RemarksText
+        CallHistory {
+          event_date_time
+          users_permissions_user {
+            username
+            email
+          }
         }
       }
     }
   }
-}
 `;
 const AddCustomerMutation = gql`
   mutation (
@@ -382,53 +396,90 @@ const AddCustomerMutation = gql`
   }
 `;
 const AddCustomerCommentMutation = gql`
-mutation($id: ID!, $remarks: String!, $date: DateTime!) {
-  updateCustomer(
-    input: {
-      where: { id: $id }
-      data: {
-        TelecallerRemarks: {
-          RemarksText: $remarks
-          CallHistory: { event_date_time: $date }
-        }
-      }
-    }
+  mutation (
+    $id: ID!
+    $remarks: String!
+    $date: DateTime!
+    $is_verified: Boolean
   ) {
-    customer {
-      id
-      NameOfBride
-      NameOfFather
-      NameOfMother
-      MarriageDate
-      MarriageMonth
-      tele_caller_contact {
-        Name
-        id
-      }
-      created_at
-      Address {
-        id
-        HouseName
-        Landmark
-        locality {
-          Name
+    updateCustomer(
+      input: {
+        where: { id: $id }
+        data: {
+          TelecallerRemarks: {
+            RemarksText: $remarks
+            CallHistory: { event_date_time: $date }
+          }
+          is_verified: $is_verified
         }
-        post_office {
+      }
+    ) {
+      customer {
+        id
+        is_verified
+        NameOfBride
+        NameOfFather
+        NameOfMother
+        MarriageDate
+        MarriageMonth
+        tele_caller_contact {
           Name
-          Pincode
-          district {
+          id
+        }
+        created_at
+        Address {
+          id
+          HouseName
+          Landmark
+          locality {
             Name
           }
-        }
-        GeoLocation {
-          Latitude
-          Longitude
-          GoogleMapURL
+          post_office {
+            Name
+            Pincode
+            district {
+              Name
+            }
+          }
+          GeoLocation {
+            Latitude
+            Longitude
+            GoogleMapURL
+          }
         }
       }
     }
   }
-}`;
+`;
+const SetKpCallerMutation = gql`
+  mutation ($id: ID!, $cust_id: [ID!]!) {
+    updateUser(input: { where: { id: $id }, data: { kp_customer: $cust_id } }) {
+      user {
+        id
+        kp_customer {
+          id
+          NameOfBride
+          NameOfFather
+        }
+      }
+    }
+  }
+`;
+const UsersQuery = gql`
+  query ($type: String!) {
+    users(where: { UserType: $type }) {
+      id
+      username
+      email
+      role {
+        id
+        name
+        type
+      }
+      UserType
+    }
+  }
+`;
 @Injectable({
   providedIn: "root",
 })
@@ -532,12 +583,16 @@ export class DataService {
       query: CustomersQuery,
     });
   }
+  getUsers(type) {
+    return this.apollo.watchQuery({
+      query: UsersQuery,
+      variables: { type: type },
+    });
+  }
   getCustomersFilter(verified) {
     return this.apollo.watchQuery({
       query: CustomersFilterQuery,
-      variables: {
-        is_verified: verified,
-      },
+      variables: verified,
     });
   }
   getSingleCustomer(id) {
@@ -572,6 +627,17 @@ export class DataService {
         id: id,
         remarks: agent.RemarksText,
         date: agent.event_date_time + ":00.000Z",
+        is_verified: agent.is_verified,
+      },
+      errorPolicy: "all",
+    });
+  }
+  SetKpCaller(id, cust_id) {
+    return this.apollo.mutate({
+      mutation: SetKpCallerMutation,
+      variables: {
+        id: id,
+        cust_id: cust_id,
       },
       errorPolicy: "all",
     });

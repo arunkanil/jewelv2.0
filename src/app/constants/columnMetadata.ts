@@ -128,6 +128,8 @@ export const customersColumn = [
   {
     field: "id",
     headerName: "ID",
+    checkboxSelection: true,
+    headerCheckboxSelection: true,
     resizable: true ,
     sortable: true ,
   },

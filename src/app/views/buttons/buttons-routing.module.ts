@@ -24,16 +24,16 @@ const routes: Routes = [
       },
       {
         path: 'assigned',
-        component: DropdownsComponent,
+        component: ButtonsComponent,
         data: {
-          title: 'Dropdowns'
+          title: 'Assigned List'
         }
       },
       {
         path: 'dnf',
-        component: BrandButtonsComponent,
+        component: ButtonsComponent,
         data: {
-          title: 'Brand buttons'
+          title: 'DNF'
         }
       },
       {

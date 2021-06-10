@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { ColorsComponent } from './colors.component';
+import { VerifiedListComponent } from './colors.component';
 import { TypographyComponent } from './typography.component';
 
 const routes: Routes = [
@@ -13,13 +13,13 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'colors'
+        redirectTo: 'manager'
       },
       {
-        path: 'contact_form',
-        component: ColorsComponent,
+        path: 'verified_list',
+        component: VerifiedListComponent,
         data: {
-          title: 'Contact'
+          title: 'Verified List'
         }
       },
       // {

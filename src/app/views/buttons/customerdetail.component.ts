@@ -47,17 +47,17 @@ export class KPCustomerDetailComponent implements OnInit {
   CommentSubmit() {
     let resp = {};
     console.log(this.commentForm.value);
-    // this.dataservice
-    //   .AddCustomerComment(this.details.id, this.commentForm.value)
-    //   .subscribe((result: any) => {
-    //     resp = result.data;
-    //     console.log("response", result);
-    //     if (result.data.updateCustomer) {
-    //       alert("Comment added successfully!");
-    //       this.commentModal.hide();
-    //     } else {
-    //       alert("Failed. Please check the fields!");
-    //     }
-    //   });
+    this.dataservice
+      .AddCustomerComment(this.details.id, this.commentForm.value)
+      .subscribe((result: any) => {
+        resp = result.data;
+        console.log("response", result);
+        if (result.data.updateCustomer) {
+          alert("Comment added successfully!");
+          this.commentModal.hide();
+        } else {
+          alert("Failed. Please check the fields!");
+        }
+      });
   }
 }

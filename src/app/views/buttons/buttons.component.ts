@@ -30,7 +30,10 @@ export class ButtonsComponent {
   }
   getLists() {
     this.loading = true;
-    this.dataservice.getCustomersFilter(false).valueChanges.subscribe((result: any) => {
+    let filter = {
+      kp_id: localStorage.getItem("uid"),
+    };
+    this.dataservice.getCustomersFilter(filter).valueChanges.subscribe((result: any) => {
       console.log("getCustomersFilter", result.data.customers);
       this.rowData = result.data.customers;
     });

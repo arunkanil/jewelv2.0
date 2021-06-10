@@ -1,34 +1,100 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
-import { getStyle, rgbToHex } from '@coreui/coreui/dist/js/coreui-utilities';
+import { Component, ViewChild } from "@angular/core";
+import { Router } from "@angular/router";
+import { DataService } from "../../data.service";
+import { customersColumn } from "../../constants/columnMetadata";
+import { ModalDirective } from "ngx-bootstrap/modal";
+import { FormBuilder, Validators } from "@angular/forms";
 
 @Component({
-  templateUrl: 'colors.component.html'
+  templateUrl: "colors.component.html",
 })
-export class ColorsComponent implements OnInit {
-  constructor(@Inject(DOCUMENT) private _document: any) {}
-
-  public themeColors(): void {
-    Array.from(this._document.querySelectorAll('.theme-color')).forEach((el: HTMLElement) => {
-      const background = getStyle('background-color', el);
-      const table = this._document.createElement('table');
-      table.innerHTML = `
-        <table class="w-100">
-          <tr>
-            <td class="text-muted">HEX:</td>
-            <td class="font-weight-bold">${rgbToHex(background)}</td>
-          </tr>
-          <tr>
-            <td class="text-muted">RGB:</td>
-            <td class="font-weight-bold">${background}</td>
-          </tr>
-        </table>
-      `;
-      el.parentNode.appendChild(table);
-    });
+export class VerifiedListComponent {
+  rowSelection: string;
+  constructor(
+    public dataservice: DataService,
+    private router: Router,
+    private fb: FormBuilder
+  ) {
+    this.columnDefs = [...customersColumn];
+    this.rowSelection = "multiple";
   }
+  @ViewChild("myModal") public myModal: ModalDirective;
+  callerForm = this.fb.group({
+    id: ["", Validators.required],
+  });
+  loading = true;
+  btnLoading = false;
+  orders: any = {};
+  columnDefs = [];
+  rowData: any = [];
+  users: any = [];
+  selectedRows: any[];
+  btnDisabled = true;
+  private gridApi;
+  private gridColumnApi;
 
   ngOnInit(): void {
-    this.themeColors();
+    this.getLists();
+  }
+  getLists() {
+    this.loading = true;
+    let filter = {
+      is_verified: true,
+      kp_caller_assigned_null: true,
+    };
+    this.dataservice
+      .getCustomersFilter(filter)
+      .valueChanges.subscribe((result: any) => {
+        console.log("getCustomersFilter", result.data.customers);
+        this.rowData = result.data.customers;
+      });
+    this.dataservice
+      .getUsers("KP_CALLER")
+      .valueChanges.subscribe((result: any) => {
+        console.log("getUsers", result.data.users);
+        this.users = result.data.users;
+      });
+  }
+  onGridReady(params) {
+    this.gridApi = params.api;
+    this.gridColumnApi = params.columnApi;
+  }
+  onSelectionChanged(event) {
+    this.selectedRows = this.gridApi.getSelectedRows();
+    if (this.selectedRows.length > 0) {
+      this.btnDisabled = false;
+    } else {
+      this.btnDisabled = true;
+    }
+    console.log(this.selectedRows);
+    // this.router.navigate(
+    //   ["/kpcaller/kp_customer_details", selectedRows[0].id],
+    //   {
+    //     state: { data: selectedRows },
+    //   }
+    // );
+  }
+  FormSubmit() {
+    let resp = {};
+    console.log(
+      this.callerForm.value,
+      Array.from(this.selectedRows, (x) => x.id)
+    );
+    this.dataservice
+      .SetKpCaller(
+        this.callerForm.value.id,
+        Array.from(this.selectedRows, (x) => x.id)
+      )
+      .subscribe((result: any) => {
+        resp = result.data;
+        console.log("response", result);
+        if (result.data.updateUser) {
+          alert("Assigned successfully!");
+          this.getLists();
+          this.myModal.hide();
+        } else {
+          alert("Failed. Please check the fields!");
+        }
+      });
   }
 }
