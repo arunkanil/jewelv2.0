@@ -7,7 +7,7 @@ import { AgentsColumn } from "../../constants/columnMetadata";
 import { ActionRenderer } from "../../utils/StatusRenderer";
 
 @Component({
-  templateUrl: "neworders.component.html",
+  templateUrl: "agents.component.html",
 })
 export class AgentsComponent {
   rowSelection: string;

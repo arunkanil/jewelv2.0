@@ -4,7 +4,7 @@ import { DataService } from "../../data.service";
 import { customersColumn } from "../../constants/columnMetadata";
 
 @Component({
-  templateUrl: 'buttons.component.html'
+  templateUrl: 'caller_list.component.html'
 })
 export class ButtonsComponent {
 
@@ -19,6 +19,7 @@ export class ButtonsComponent {
   
   loading = true;
   btnLoading = false;
+  title = "Verification";
   orders: any = {};
   columnDefs = [];
   rowData: any = [];
@@ -27,12 +28,23 @@ export class ButtonsComponent {
 
   ngOnInit(): void {
     this.getLists();
+    console.log(this.router);
   }
   getLists() {
     this.loading = true;
-    let filter = {
-      kp_id: localStorage.getItem("uid"),
-    };
+    let filter ={};
+    if(this.router.url === "/kpcaller/verification") {
+      filter = {
+        is_verified: false,
+      };
+      this.title = "Verification";
+    }
+    else {
+      filter = {
+        kp_id: localStorage.getItem("uid"),
+      };
+      this.title = "Assigned";
+    }
     this.dataservice.getCustomersFilter(filter).valueChanges.subscribe((result: any) => {
       console.log("getCustomersFilter", result.data.customers);
       this.rowData = result.data.customers;

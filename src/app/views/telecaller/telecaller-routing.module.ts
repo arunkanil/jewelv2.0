@@ -1,9 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-import { CustomersComponent } from './readyfordelivery.component';
-import { AllOrdersComponent } from './allorders.component';
-import { AgentsComponent } from './neworders.component';
+import { CustomersComponent } from './customers.component';
+import { AgentsComponent } from './agents.component';
 import { AgentDetailComponent } from './agentdetail.component';
 import { CustomerDetailComponent } from './customerdetail.component';
 import { AuthGuard } from '../login/auth.guard';
@@ -35,13 +34,6 @@ const routes: Routes = [
         }
       },
       {
-        path: 'all_orders',
-        component: AllOrdersComponent,
-        data: {
-          title: 'All Orders'
-        }
-      },
-      {
         path: 'agent_details/:id',
         component: AgentDetailComponent,
         data: {
@@ -63,4 +55,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class BaseRoutingModule {}
+export class TelecallerRoutingModule {}

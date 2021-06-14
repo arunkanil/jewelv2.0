@@ -206,11 +206,31 @@ const CustomersQuery = gql`
       NameOfMother
       MarriageDate
       MarriageMonth
+      kp_caller_assigned {
+        email
+        username
+      }
       tele_caller_contact {
         Name
         id
       }
       created_at
+      FieldReport{
+        id
+        FinancialBackground
+        QtyOfGold
+        PreferredWeddingSet
+        PlanningForReplacementAfterWedding
+        OldGoldExchangeQty
+        NoCostEmiRequired
+        EmiTenure
+        EmiIntervals
+        TokenAdvance
+        RateAdvance
+        EnquiriesFromOthers
+        AdvancePaidToOtherJewellery
+        NumberOfNewMarriageAddress
+      }
       Address {
         id
         HouseName
@@ -259,6 +279,22 @@ const CustomersFilterQuery = gql`
         id
       }
       created_at
+      FieldReport{
+        id
+        FinancialBackground
+        QtyOfGold
+        PreferredWeddingSet
+        PlanningForReplacementAfterWedding
+        OldGoldExchangeQty
+        NoCostEmiRequired
+        EmiTenure
+        EmiIntervals
+        TokenAdvance
+        RateAdvance
+        EnquiriesFromOthers
+        AdvancePaidToOtherJewellery
+        NumberOfNewMarriageAddress
+      }
       Address {
         id
         HouseName
@@ -296,7 +332,27 @@ const CustomerSingleQuery = gql`
         Name
         id
       }
+      kp_caller_assigned {
+        email
+        username
+      }
       created_at
+      FieldReport{
+        id
+        FinancialBackground
+        QtyOfGold
+        PreferredWeddingSet
+        PlanningForReplacementAfterWedding
+        OldGoldExchangeQty
+        NoCostEmiRequired
+        EmiTenure
+        EmiIntervals
+        TokenAdvance
+        RateAdvance
+        EnquiriesFromOthers
+        AdvancePaidToOtherJewellery
+        NumberOfNewMarriageAddress
+      }
       Address {
         id
         HouseName

@@ -6,7 +6,7 @@ import { ModalDirective } from "ngx-bootstrap/modal";
 import { FormBuilder, Validators } from "@angular/forms";
 
 @Component({
-  templateUrl: "colors.component.html",
+  templateUrl: "verified.component.html",
 })
 export class VerifiedListComponent {
   rowSelection: string;

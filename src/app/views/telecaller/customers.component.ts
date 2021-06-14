@@ -6,7 +6,7 @@ import { FormBuilder, Validators } from "@angular/forms";
 import { customersColumn,Months } from "../../constants/columnMetadata";
 
 @Component({
-  templateUrl: "readyfordelivery.component.html",
+  templateUrl: "customers.component.html",
 })
 export class CustomersComponent {
   rowSelection: string;

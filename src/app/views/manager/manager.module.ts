@@ -5,17 +5,17 @@ import { AgGridModule } from 'ag-grid-angular';
 import { ModalModule } from 'ngx-bootstrap/modal';
 
 import { NgModule } from '@angular/core';
-import { VerifiedListComponent } from './colors.component';
+import { VerifiedListComponent } from './verified.component';
 
 // import { TypographyComponent } from './typography.component';
 
 // Theme Routing
-import { ThemeRoutingModule } from './theme-routing.module';
+import { ManagerRoutingModule } from './manager-routing.module';
 
 @NgModule({
   imports: [
     CommonModule,
-    ThemeRoutingModule,
+    ManagerRoutingModule,
     ReactiveFormsModule,
     AgGridModule.withComponents([]),
     ModalModule.forRoot(),
@@ -26,4 +26,4 @@ import { ThemeRoutingModule } from './theme-routing.module';
     // TypographyComponent
   ]
 })
-export class ThemeModule { }
+export class ManagerModule { }

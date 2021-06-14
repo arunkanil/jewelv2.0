@@ -54,15 +54,15 @@ export const routes: Routes = [
     children: [
       {
         path: 'order',
-        loadChildren: () => import('./views/base/base.module').then(m => m.BaseModule)
+        loadChildren: () => import('./views/telecaller/telecaller.module').then(m => m.TelecallerModule)
       },
       {
         path: 'manager',
-        loadChildren: () => import('./views/theme/theme.module').then(m => m.ThemeModule)
+        loadChildren: () => import('./views/manager/manager.module').then(m => m.ManagerModule)
       },
       {
         path: 'kpcaller',
-        loadChildren: () => import('./views/buttons/buttons.module').then(m => m.ButtonsModule)
+        loadChildren: () => import('./views/kpcaller/kpcaller.module').then(m => m.KpCallerModule)
       },
       {
         path: 'charts',

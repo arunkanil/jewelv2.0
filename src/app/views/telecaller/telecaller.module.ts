@@ -4,11 +4,10 @@ import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import {IvyCarouselModule} from 'angular-responsive-carousel';
 
-import { CustomersComponent } from './readyfordelivery.component';
+import { CustomersComponent } from './customers.component';
 
 // Forms Component
-import { AllOrdersComponent } from './allorders.component';
-import { AgentsComponent } from './neworders.component';
+import { AgentsComponent } from './agents.component';
 import { AgentDetailComponent } from './agentdetail.component';
 // Tabs Component
 import { TabsModule } from 'ngx-bootstrap/tabs';
@@ -35,7 +34,7 @@ import { ProgressbarModule } from 'ngx-bootstrap/progressbar';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 
 // Components Routing
-import { BaseRoutingModule } from './base-routing.module';
+import { TelecallerRoutingModule } from './telecaller-routing.module';
 import { AgGridModule } from 'ag-grid-angular';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { CustomerDetailComponent } from './customerdetail.component';
@@ -46,7 +45,7 @@ import { CustomerDetailComponent } from './customerdetail.component';
     AgGridModule.withComponents([]),
     FormsModule,
     ReactiveFormsModule,
-    BaseRoutingModule,
+    TelecallerRoutingModule,
     BsDropdownModule.forRoot(),
     TabsModule,
     IvyCarouselModule,
@@ -60,10 +59,9 @@ import { CustomerDetailComponent } from './customerdetail.component';
   ],
   declarations: [
     CustomersComponent,
-    AllOrdersComponent,
     AgentsComponent,
     AgentDetailComponent,
     CustomerDetailComponent
   ]
 })
-export class BaseModule { }
+export class TelecallerModule { }

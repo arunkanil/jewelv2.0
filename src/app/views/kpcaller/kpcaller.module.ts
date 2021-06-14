@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 
-import { ButtonsComponent } from './buttons.component';
+import { ButtonsComponent } from './caller_list.component';
 import { BrandButtonsComponent } from './brand-buttons.component';
 
 // Dropdowns Component
@@ -10,7 +10,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { DropdownsComponent } from './dropdowns.component';
 
 // Buttons Routing
-import { ButtonsRoutingModule } from './buttons-routing.module';
+import { KpCallerRoutingModule } from './kpcaller-routing.module';
 
 // Angular
 import { AgGridModule } from 'ag-grid-angular';
@@ -22,7 +22,7 @@ import { KPCustomerDetailComponent } from './customerdetail.component';
     CommonModule,
     ReactiveFormsModule,
     AgGridModule.withComponents([]),
-    ButtonsRoutingModule,
+    KpCallerRoutingModule,
     BsDropdownModule.forRoot(),
     ModalModule.forRoot(),
     FormsModule
@@ -34,4 +34,4 @@ import { KPCustomerDetailComponent } from './customerdetail.component';
     KPCustomerDetailComponent
   ]
 })
-export class ButtonsModule { }
+export class KpCallerModule { }
