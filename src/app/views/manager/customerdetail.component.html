@@ -1,0 +1,256 @@
+<div class="animated fadeIn">
+    <div bsModal #deleteModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm">
+            <div class="modal-content">
+                <div class="modal-body text-center">
+                    Do you want to delete this agent?
+                </div>
+                <div class="modal-footer justify-content-around">
+                    <button type="button" class="btn btn-secondary" (click)="deleteModal.hide()">
+                        No! Cancel.
+                    </button>
+                    <button type="button" class="btn btn-primary" (click)="deleteAgent()">
+                        Yes! Delete.
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header" style="display: flex; justify-content: space-between">
+            <h2>Customer Details</h2>
+            <span>
+                <button type="button" class="btn btn-primary" data-toggle="modal" (click)="myModal.show()">
+                Assign to field agent
+            </button>
+                <!-- <button type="button" class="btn btn-danger" data-toggle="modal" (click)="deleteModal.show()">
+                Delete
+            </button> -->
+            </span>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col">
+                    <div class="row">
+                        <div style="display: flex; justify-content: space-between">
+                            <h4>Basic details</h4>
+                        </div>
+                        <table class="table table-striped">
+                            <tbody>
+                                <tr>
+                                    <td>ID</td>
+                                    <td>{{details?.id}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Name Of Father</td>
+                                    <td>{{details?.NameOfBride}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Name Of Father</td>
+                                    <td>{{details?.NameOfFather}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Name Of Mother</td>
+                                    <td>{{ details?.NameOfMother }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Marriage Date</td>
+                                    <td>{{ details?.MarriageDate }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Marriage Month</td>
+                                    <td>{{ details?.MarriageMonth }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Agent</td>
+                                    <td>
+                                        <span class="badge badge-warning">{{ details.tele_caller_contact?.Name }}</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>KP Caller</td>
+                                    <td>
+                                        <span class="badge badge-primary">{{ details.kp_caller_assigned?.username
+                                            }}</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>House Name</td>
+                                    <td>{{ details.Address?.HouseName }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Landmark</td>
+                                    <td>{{ details.Address?.Landmark }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Locality</td>
+                                    <td>{{ details.Address?.locality?.Name }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row">
+                        <div style="display: flex; justify-content: space-between">
+                            <h4>Field Report</h4>
+                        </div>
+                        <table class="table table-striped">
+                            <tbody>
+                                <tr>
+                                    <td>Financial category</td>
+                                    <td>{{details.FieldReport?.FinancialBackground}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Quantity of intended purchase</td>
+                                    <td>{{details.FieldReport?.QtyOfGold}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Suitable set</td>
+                                    <td>{{details.FieldReport?.PreferredWeddingSet}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Whether planning to exchange after marriage?</td>
+                                    <td>{{ details.FieldReport?.PlanningForReplacementAfterWedding }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Quantity of old gold for exchange</td>
+                                    <td>{{ details.FieldReport?.OldGoldExchangeQty }}</td>
+                                </tr>
+                                <tr>
+                                    <td>No cost emi needed?</td>
+                                    <td>{{ details.FieldReport?.NoCostEmiRequired }}</td>
+                                </tr>
+                                <tr>
+                                    <td>EMI tenure</td>
+                                    <td>
+                                        <span class="badge badge-warning">{{ details.FieldReport?.EmiTenure }}</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Number of repayments</td>
+                                    <td>
+                                        <span class="badge badge-primary">{{ details.FieldReport?.EmiIntervals
+                                            }}</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Token advance</td>
+                                    <td>{{ details.FieldReport?.TokenAdvance }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Rate advance</td>
+                                    <td>{{ details.FieldReport?.RateAdvance }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Whether approached by other jewelleries?</td>
+                                    <td>{{ details.FieldReport?.EnquiriesFromOthers }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Advance paid to other jewellery</td>
+                                    <td>{{ details.FieldReport?.AdvancePaidToOtherJewellery }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Whether received any fresh leads?</td>
+                                    <td>{{ details.FieldReport?.NumberOfNewMarriageAddress }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="col">
+                    <div style="display: flex; justify-content: space-between">
+                        <h4>Remarks</h4>
+                    </div>
+                    <div class="card" *ngFor="let item of details.TelecallerRemarks">
+                        <div class="card-body">
+                            <h5 class="card-title">{{item.CallHistory?.event_date_time}}</h5>
+                            <p class="card-text">{{item.RemarksText}}</p>
+                            <span
+                                class="badge badge-primary">{{item.CallHistory.users_permissions_user?.username}}</span>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" (click)="commentModal.show()">
+                        Add Comment
+                    </button>
+                </div>
+            </div>
+
+        </div>
+        <div bsModal #myModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Assign to field Agent</h4>
+                        <button type="button" class="close" (click)="myModal.hide()" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form [formGroup]="agentForm" (ngSubmit)="FormSubmit()">                            
+                            <div class="form-group">
+                                <label for="group">Field agent</label>
+                                <select class="form-control" id="agent" required ngModel name="agent"
+                                    formControlName="agent">
+                                    <option value="" disabled selected hidden>Choose...</option>
+                                    <option *ngFor="let item of users" value="{{ item.id }}">
+                                        {{ item.username }}
+                                    </option>
+                                </select>
+                            </div>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                Close
+                            </button>
+                            <button type="submit" class="btn btn-primary ml-2"
+                                [disabled]="btnLoading || !agentForm.valid">
+                                <span *ngIf="btnLoading" class="spinner-border spinner-border-sm" role="status"
+                                    aria-hidden="true"></span>
+                                Save changes
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+        <div bsModal #commentModal="bs-modal" class="modal fade" tabindex="-1" role="dialog"
+            aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Add Comment</h4>
+                        <button type="button" class="close" (click)="commentModal.hide()" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form [formGroup]="commentForm" (ngSubmit)="CommentSubmit()">
+                            <div class="form-group">
+                                <label for="name">Remarks</label>
+                                <textarea class="form-control" maxlength="250" id="RemarksText" name="RemarksText"
+                                    formControlName="RemarksText" placeholder="Enter remarks"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Date</label>
+                                <input type="datetime-local" class="form-control" id="event_date_time"
+                                    name="event_date_time" formControlName="event_date_time" />
+                            </div>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                Close
+                            </button>
+                            <button type="submit" class="btn btn-primary ml-2"
+                                [disabled]="btnLoading || !commentForm.valid">
+                                <span *ngIf="btnLoading" class="spinner-border spinner-border-sm" role="status"
+                                    aria-hidden="true"></span>
+                                Save changes
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+        </div>
+    </div>
+</div>

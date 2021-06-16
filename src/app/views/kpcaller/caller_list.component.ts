@@ -39,11 +39,17 @@ export class ButtonsComponent {
       };
       this.title = "Verification";
     }
-    else {
+    else if(this.router.url === "/kpcaller/assigned") {
       filter = {
         kp_id: localStorage.getItem("uid"),
       };
       this.title = "Assigned";
+    }
+    else {
+      filter = {
+        MarriageDate_null: true,
+      };
+      this.title = "Date Not Fixed";
     }
     this.dataservice.getCustomersFilter(filter).valueChanges.subscribe((result: any) => {
       console.log("getCustomersFilter", result.data.customers);

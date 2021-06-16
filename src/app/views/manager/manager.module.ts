@@ -11,6 +11,8 @@ import { VerifiedListComponent } from './verified.component';
 
 // Theme Routing
 import { ManagerRoutingModule } from './manager-routing.module';
+import { ManagerCustomerComponent } from './customers.component';
+import { ManagerCustomerDetailComponent } from './customerdetail.component';
 
 @NgModule({
   imports: [
@@ -23,7 +25,8 @@ import { ManagerRoutingModule } from './manager-routing.module';
   ],
   declarations: [
     VerifiedListComponent,
-    // TypographyComponent
+    ManagerCustomerComponent,
+    ManagerCustomerDetailComponent
   ]
 })
 export class ManagerModule { }

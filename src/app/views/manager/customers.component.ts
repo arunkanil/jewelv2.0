@@ -8,7 +8,7 @@ import { customersColumn,Months } from "../../constants/columnMetadata";
 @Component({
   templateUrl: "customers.component.html",
 })
-export class CustomersComponent {
+export class ManagerCustomerComponent {
   rowSelection: string;
   constructor(
     public dataservice: DataService,
@@ -68,7 +68,7 @@ export class CustomersComponent {
   onSelectionChanged(event) {
     var selectedRows = this.gridApi.getSelectedRows();
     console.log(selectedRows);
-    this.router.navigate(["/telecaller/customer_details",selectedRows[0].id], {
+    this.router.navigate(["/manager/customer_details",selectedRows[0].id], {
       state: { data: selectedRows },
     });
   }

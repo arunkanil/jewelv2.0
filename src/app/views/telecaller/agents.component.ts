@@ -65,7 +65,7 @@ export class AgentsComponent {
   onSelectionChanged(event) {
     var selectedRows = this.gridApi.getSelectedRows();
     console.log(selectedRows);
-    this.router.navigate(["/order/agent_details",selectedRows[0].id], {
+    this.router.navigate(["/telecaller/agent_details",selectedRows[0].id], {
       state: { data: selectedRows },
     });
   }

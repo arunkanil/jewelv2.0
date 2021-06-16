@@ -215,7 +215,7 @@ const CustomersQuery = gql`
         id
       }
       created_at
-      FieldReport{
+      FieldReport {
         id
         FinancialBackground
         QtyOfGold
@@ -255,12 +255,20 @@ const CustomersQuery = gql`
   }
 `;
 const CustomersFilterQuery = gql`
-  query ($is_verified: Boolean, $kp_caller_assigned_null: Boolean, $kp_id:ID) {
+  query (
+    $is_verified: Boolean
+    $kp_caller_assigned_null: Boolean
+    $kp_id: ID
+    $MarriageMonth_null: Boolean
+    $MarriageDate_null: Boolean
+  ) {
     customers(
       where: {
         is_verified: $is_verified
         kp_caller_assigned_null: $kp_caller_assigned_null
-        kp_caller_assigned : $kp_id
+        kp_caller_assigned: $kp_id
+        MarriageDate_null: $MarriageDate_null
+        MarriageMonth_null: $MarriageMonth_null
       }
     ) {
       id
@@ -279,7 +287,7 @@ const CustomersFilterQuery = gql`
         id
       }
       created_at
-      FieldReport{
+      FieldReport {
         id
         FinancialBackground
         QtyOfGold
@@ -337,7 +345,7 @@ const CustomerSingleQuery = gql`
         username
       }
       created_at
-      FieldReport{
+      FieldReport {
         id
         FinancialBackground
         QtyOfGold
@@ -521,6 +529,21 @@ const SetKpCallerMutation = gql`
     }
   }
 `;
+const SetFieldAgentMutation = gql`
+  mutation ($id: ID!, $cust_id: [ID!]!) {
+    updateUser(input: { where: { id: $id }, data: { customers: $cust_id } }) {
+      user {
+        id
+        customers {
+          NameOfBride
+          id
+          NameOfFather
+          MarriageDate
+        }
+      }
+    }
+  }
+`;
 const UsersQuery = gql`
   query ($type: String!) {
     users(where: { UserType: $type }) {
@@ -691,6 +714,16 @@ export class DataService {
   SetKpCaller(id, cust_id) {
     return this.apollo.mutate({
       mutation: SetKpCallerMutation,
+      variables: {
+        id: id,
+        cust_id: cust_id,
+      },
+      errorPolicy: "all",
+    });
+  }
+  SetFieldAgent(id, cust_id) {
+    return this.apollo.mutate({
+      mutation: SetFieldAgentMutation,
       variables: {
         id: id,
         cust_id: cust_id,

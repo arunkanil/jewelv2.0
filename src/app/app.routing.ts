@@ -1,13 +1,10 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-
 // Import Containers
 import { DefaultLayoutComponent } from './containers';
-
 import { P404Component } from './views/error/404.component';
 import { P500Component } from './views/error/500.component';
 import { LoginComponent } from './views/login/login.component';
-import { RegisterComponent } from './views/register/register.component';
 import { AuthGuard } from './views/login/auth.guard';
 
 export const routes: Routes = [
@@ -38,13 +35,6 @@ export const routes: Routes = [
     }
   },
   {
-    path: 'register',
-    component: RegisterComponent,
-    data: {
-      title: 'Register Page'
-    }
-  },
-  {
     path: '',
     component: DefaultLayoutComponent,
     data: {
@@ -53,7 +43,7 @@ export const routes: Routes = [
     canActivate: [AuthGuard],
     children: [
       {
-        path: 'order',
+        path: 'telecaller',
         loadChildren: () => import('./views/telecaller/telecaller.module').then(m => m.TelecallerModule)
       },
       {
@@ -65,24 +55,8 @@ export const routes: Routes = [
         loadChildren: () => import('./views/kpcaller/kpcaller.module').then(m => m.KpCallerModule)
       },
       {
-        path: 'charts',
-        loadChildren: () => import('./views/chartjs/chartjs.module').then(m => m.ChartJSModule)
-      },
-      {
         path: 'dashboard',
         loadChildren: () => import('./views/dashboard/dashboard.module').then(m => m.DashboardModule)
-      },
-      {
-        path: 'icons',
-        loadChildren: () => import('./views/icons/icons.module').then(m => m.IconsModule)
-      },
-      {
-        path: 'notifications',
-        loadChildren: () => import('./views/notifications/notifications.module').then(m => m.NotificationsModule)
-      },
-      {
-        path: 'widgets',
-        loadChildren: () => import('./views/widgets/widgets.module').then(m => m.WidgetsModule)
       }
     ]
   },

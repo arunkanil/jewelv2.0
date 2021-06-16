@@ -1,34 +1,28 @@
-import { BrowserModule } from '@angular/platform-browser';
+// import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
-
-import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
-import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
-import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
+// import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+// import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 import { AgGridModule } from 'ag-grid-angular';
+import { IconSetModule, IconSetService } from '@coreui/icons-angular';
 
-import { IconModule, IconSetModule, IconSetService } from '@coreui/icons-angular';
-
-const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
-  suppressScrollX: true
-};
+// const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
+//   suppressScrollX: true
+// };
 
 import { AppComponent } from './app.component';
-
 // Import containers
 import { DefaultLayoutComponent } from './containers';
-
 import { P404Component } from './views/error/404.component';
 import { P500Component } from './views/error/500.component';
 import { LoginComponent } from './views/login/login.component';
-import { RegisterComponent } from './views/register/register.component';
 
-const APP_CONTAINERS = [
-  DefaultLayoutComponent
-];
+// const APP_CONTAINERS = [
+//   DefaultLayoutComponent
+// ];
 
 import {
   AppAsideModule,
@@ -43,13 +37,12 @@ import { AppRoutingModule } from './app.routing';
 
 // Import 3rd party components
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
-import { TabsModule } from 'ngx-bootstrap/tabs';
-import { ChartsModule } from 'ng2-charts';
+// import { TabsModule } from 'ngx-bootstrap/tabs';
 import { GraphQLModule } from './graphql.module';
 
 @NgModule({
   imports: [
-    BrowserModule,
+    // BrowserModule,
     AgGridModule.withComponents([]),
     HttpClientModule,
     FormsModule,
@@ -61,11 +54,10 @@ import { GraphQLModule } from './graphql.module';
     AppFooterModule,
     AppHeaderModule,
     AppSidebarModule,
-    PerfectScrollbarModule,
+    // PerfectScrollbarModule,
     BsDropdownModule.forRoot(),
-    TabsModule.forRoot(),
-    ChartsModule,
-    IconModule,
+    // TabsModule.forRoot(),
+    // IconModule,
     IconSetModule.forRoot(),
     GraphQLModule,
   ],
@@ -76,7 +68,6 @@ import { GraphQLModule } from './graphql.module';
     P500Component,
     LoginComponent,
     DefaultLayoutComponent,
-    RegisterComponent
   ],
   providers: [
     {

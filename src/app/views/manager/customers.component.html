@@ -1,0 +1,106 @@
+<div class="animated fadeIn">
+  <div class="card">
+    <div class="card-header" style="display: flex; justify-content: space-between">
+      <h2>Customers</h2>
+      <button type="button" class="btn btn-primary" data-toggle="modal" (click)="myModal.show()">
+        New
+      </button>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-12">
+          <ag-grid-angular #agGrid style="width: 100%; height: 500px" id="myGrid" class="ag-theme-alpine"
+            [columnDefs]="columnDefs" [rowData]="rowData" [rowSelection]="rowSelection"
+            (gridReady)="onGridReady($event)" (selectionChanged)="onSelectionChanged($event)" animateRows="true">
+          </ag-grid-angular>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div bsModal #myModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Add New Customer</h4>
+          <button type="button" class="close" (click)="myModal.hide()" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="customerForm" (ngSubmit)="FormSubmit()">
+            <div class="form-group">
+              <label for="name">Name of Bride</label>
+              <input type="text" class="form-control" id="NameOfBride" name="NameOfBride" formControlName="NameOfBride"
+                placeholder="Enter bride's name" />
+            </div>
+            <div class="form-group">
+              <label for="name">Name of Father</label>
+              <input type="text" class="form-control" id="NameOfFather" name="NameOfFather"
+                formControlName="NameOfFather" placeholder="Enter father's name" />
+            </div>
+            <div class="form-group">
+              <label for="name">Name of Mother</label>
+              <input type="text" class="form-control" id="NameOfMother" name="NameOfMother"
+                formControlName="NameOfMother" placeholder="Enter mother's name" />
+            </div>
+            <div class="form-group">
+              <label for="email">Marriage date</label>
+              <input type="date" class="form-control" id="MarriageDate" name="MarriageDate"
+                formControlName="MarriageDate" />
+            </div>
+            <div class="form-group">
+              <label for="group">Marriage month</label>
+              <select class="form-control" id="MarriageMonth" required ngModel name="MarriageMonth" formControlName="MarriageMonth">
+                <option value="" disabled selected hidden>Choose...</option>
+                <option *ngFor="let item of Months" value="{{ item.id }}">
+                  {{ item.Name }}
+                </option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="group">Agent</label>
+              <select class="form-control" id="tele_caller_contact" required ngModel name="tele_caller_contact" formControlName="tele_caller_contact">
+                <option value="" disabled selected hidden>Choose...</option>
+                <option *ngFor="let item of agents" value="{{ item.id }}">
+                  {{ item.Name }}
+                </option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="name">House Name</label>
+              <input type="text" class="form-control" id="HouseName" name="HouseName"
+                formControlName="HouseName" placeholder="Enter House Name" />
+            </div>
+            <div class="form-group">
+              <label for="name">Landmark</label>
+              <input type="text" class="form-control" id="Landmark" name="Landmark"
+                formControlName="Landmark" placeholder="Enter Landmark" />
+            </div>
+            <div class="form-group">
+              <label for="locality">Name of locality</label>
+              <!-- <input type="text" class="form-control" id="locality" name="locality" formControlName="locality"
+                placeholder="Enter locality" /> -->
+                <select class="form-control" id="locality" required ngModel name="locality" formControlName="locality">
+                  <option value="" disabled selected hidden>Choose...</option>
+                  <option *ngFor="let item of localities" value="{{ item.id }}">
+                    {{ item.Name }}
+                  </option>
+                </select>
+            </div>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">
+              Close
+            </button>
+            <button type="submit" class="btn btn-primary ml-2" [disabled]="btnLoading || !customerForm.valid">
+              <span *ngIf="btnLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+              Save changes
+            </button>
+          </form>
+        </div>
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+  <!-- /.modal -->
+</div>

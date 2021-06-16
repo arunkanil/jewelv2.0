@@ -16,7 +16,7 @@ const routes: Routes = [
         redirectTo: 'cards'
       },
       {
-        path: 'ready_for_delivery',
+        path: 'customers',
         canActivate: [AuthGuard],
         component: CustomersComponent,
         data: {
@@ -25,7 +25,7 @@ const routes: Routes = [
         }
       },
       {
-        path: 'order_processing',
+        path: 'agents',
         canActivate: [AuthGuard],
         component: AgentsComponent,
         data: {
